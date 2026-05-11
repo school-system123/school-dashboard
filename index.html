@@ -75,13 +75,35 @@
 </div>
 
 <script>
+
+const API_URL = "https://script.google.com/macros/s/AKfycbzN0J1CrBYzvKrwGfbuIgS-g5OBSEPerlkQ22C5UbRXSiZ1tw5t-AAKw-CZD5wJhIwS7Q/exec";
+
 function sendHomework() {
   let cls = document.getElementById("class").value;
   let subject = document.getElementById("subject").value;
   let homework = document.getElementById("homework").value;
 
-  alert("Homework Ready:\n" + cls + "\n" + subject + "\n" + homework);
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      type: "homework",
+      class: cls,
+      subject: subject,
+      homework: homework
+    })
+  })
+  .then(res => res.text())
+  .then(data => {
+    alert("Homework Sent Successfully!");
+    document.getElementById("class").value = "";
+    document.getElementById("subject").value = "";
+    document.getElementById("homework").value = "";
+  })
+  .catch(err => {
+    alert("Error sending homework!");
+  });
 }
+
 </script>
 
 </body>
