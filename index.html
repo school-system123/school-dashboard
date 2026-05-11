@@ -1,1 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>School Dashboard</title>
+</head>
+<body>
 
+<h2>Teacher Homework Panel</h2>
+
+<label>Class:</label>
+<input type="text" id="class"><br><br>
+
+<label>Subject:</label>
+<input type="text" id="subject"><br><br>
+
+<label>Homework:</label>
+<textarea id="homework"></textarea><br><br>
+
+<button onclick="send()">Send Homework</button>
+
+<script>
+function send() {
+  let cls = document.getElementById("class").value;
+  let subject = document.getElementById("subject").value;
+  let homework = document.getElementById("homework").value;
+
+  alert("Homework Ready to Send:\n" + cls + "\n" + subject + "\n" + homework);
+}
+</script>
+
+</body>
+</html>
