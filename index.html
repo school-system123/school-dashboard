@@ -774,6 +774,39 @@ row.style.display = "none";
 });
 
 }
+// =========================
+// SEARCH STUDENT
+// =========================
+
+function searchStudent(){
+
+let input =
+document.getElementById("searchStudent")
+.value.toLowerCase();
+
+let rows =
+document.querySelectorAll("#studentTable tr");
+
+rows.forEach(row => {
+
+let text =
+row.innerText.toLowerCase();
+
+if(text.includes(input)){
+
+row.style.display = "";
+
+}
+
+else{
+
+row.style.display = "none";
+
+}
+
+});
+
+}  
 loadStudents();
 
 </script>
