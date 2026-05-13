@@ -428,96 +428,50 @@
 
   async function loadStudents(){
 
-    const classes = [
-      "Nursery",
-      "KG1",
-      "KG2",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "10"
-    ];
+  try{
+
+    let response = await fetch(
+      "https://script.google.com/macros/s/AKfycbxTaVG24g4sRyMw5bPML7L94j1G-_ArrJp993uU_BSaiq2QjbmoaCAIH456-6S2M2A/exec"
+    );
+
+    let data = await response.json();
 
     let tbody =
     document.getElementById("studentTable");
 
     tbody.innerHTML = "";
 
-    let totalStudents = 0;
+    let total = 0;
 
-    for(let cls of classes){
+    data.forEach(student => {
 
-      try{
+      total++;
 
-        let url =
-        `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(cls)}`;
+      tbody.innerHTML += `
 
-        let response = await fetch(url);
+      <tr>
+        <td>${student["Student Name"] || ""}</td>
+        <td>${student["Class"] || ""}</td>
+        <td>${student["Father Name"] || ""}</td>
+        <td>${student["Phone"] || ""}</td>
+      </tr>
 
-        let data = await response.json();
+      `;
 
-        if(Array.isArray(data)){
-
-          data.forEach(student => {
-
-            let studentName =
-            student["Student Name"] ||
-            student["student name"] ||
-            student["Name"] ||
-            "";
-
-            let fatherName =
-            student["Father Name"] ||
-            student["father name"] ||
-            "";
-
-            let phone =
-            student["Phone"] ||
-            student["phone"] ||
-            student["Contact"] ||
-            "";
-
-            if(studentName){
-
-              totalStudents++;
-
-              tbody.innerHTML += `
-
-              <tr>
-                <td>${studentName}</td>
-                <td>${cls}</td>
-                <td>${fatherName}</td>
-                <td>${phone}</td>
-              </tr>
-
-              `;
-
-            }
-
-          });
-
-        }
-
-      }
-
-      catch(error){
-
-        console.log("Class Error:", cls);
-
-      }
-
-    }
+    });
 
     document.getElementById("totalStudents")
-    .innerHTML = totalStudents;
+    .innerHTML = total;
 
   }
+
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
 
   // =========================
   // SEND HOMEWORK
