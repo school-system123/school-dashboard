@@ -27,7 +27,7 @@
     }
 
     .header h1{
-      font-size:28px;
+      font-size:26px;
     }
 
     .header p{
@@ -73,18 +73,17 @@
       border-radius:10px;
       outline:none;
       font-size:15px;
-      transition:0.3s;
+    }
+
+    textarea{
+      min-height:130px;
+      resize:vertical;
     }
 
     input:focus,
     textarea:focus{
       border-color:#2563eb;
       box-shadow:0 0 0 3px rgba(37,99,235,0.15);
-    }
-
-    textarea{
-      min-height:130px;
-      resize:vertical;
     }
 
     .btn{
@@ -98,7 +97,6 @@
       font-size:16px;
       font-weight:bold;
       cursor:pointer;
-      transition:0.3s;
     }
 
     .btn:hover{
@@ -112,31 +110,14 @@
       display:none;
     }
 
-    .success{
-      color:green;
-    }
-
-    .error{
-      color:red;
-    }
+    .success{ color:green; }
+    .error{ color:red; }
 
     .footer{
       text-align:center;
       padding:15px;
       color:#6b7280;
       font-size:13px;
-    }
-
-    @media(max-width:600px){
-
-      .card{
-        padding:20px;
-      }
-
-      .header h1{
-        font-size:22px;
-      }
-
     }
 
   </style>
@@ -156,27 +137,16 @@
       <h2>📚 Send Homework</h2>
 
       <div class="label">Class</div>
-      <input
-        type="text"
-        id="class"
-        placeholder="Enter Class (Example: 5-A)"
-      >
+      <input type="text" id="class" placeholder="Example: 5-A">
 
       <div class="label">Subject</div>
-      <input
-        type="text"
-        id="subject"
-        placeholder="Enter Subject"
-      >
+      <input type="text" id="subject" placeholder="Example: English">
 
       <div class="label">Homework</div>
-      <textarea
-        id="homework"
-        placeholder="Write Homework Here..."
-      ></textarea>
+      <textarea id="homework" placeholder="Write Homework..."></textarea>
 
       <button class="btn" onclick="sendHomework()">
-        ✅ Send Homework
+        🚀 Send Homework
       </button>
 
       <div id="status" class="status"></div>
@@ -191,9 +161,6 @@
 
 <script>
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbzN0J1CrBYzvKrwGfbuIgS-g5OBSEPerlkQ22C5UbRXSiZ1tw5t-AAKw-CZD5wJhIwS7Q/exec";
-
 async function sendHomework(){
 
   let cls = document.getElementById("class").value.trim();
@@ -206,19 +173,9 @@ async function sendHomework(){
 
     status.style.display = "block";
     status.className = "status error";
-    status.innerHTML = "❌ Please fill all fields.";
-
+    status.innerHTML = "❌ Please fill all fields!";
     return;
   }
-
-  let message =
-`🏫 School Homework
-
-📘 Class: ${cls}
-📖 Subject: ${subject}
-
-📝 Homework:
-${homework}`;
 
   status.style.display = "block";
   status.className = "status";
@@ -226,37 +183,45 @@ ${homework}`;
 
   try{
 
-    let response = await fetch(API_URL, {
+    let response = await fetch("http://localhost:3000/send-homework", {
 
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
 
       body: JSON.stringify({
-
-        type: "homework",
-        class: cls,
+        className: cls,
         subject: subject,
-        homework: homework,
-        message: message
-
+        homework: homework
       })
 
     });
 
-    let data = await response.text();
+    let data = await response.json();
 
-    status.className = "status success";
-    status.innerHTML = "✅ Homework Sent Successfully!";
+    if(data.success){
 
-    document.getElementById("class").value = "";
-    document.getElementById("subject").value = "";
-    document.getElementById("homework").value = "";
+      status.className = "status success";
+      status.innerHTML = "✅ Homework Sent Successfully!";
+
+      document.getElementById("class").value = "";
+      document.getElementById("subject").value = "";
+      document.getElementById("homework").value = "";
+
+    } else {
+
+      status.className = "status error";
+      status.innerHTML = "❌ Failed to Send Homework!";
+
+    }
 
   }
 
-  catch(error){
+  catch(err){
 
     status.className = "status error";
-    status.innerHTML = "❌ Error Sending Homework!";
+    status.innerHTML = "❌ Server Connection Error!";
 
   }
 
