@@ -588,6 +588,11 @@ style="display:none;">
 
 <script>
 
+// =========================
+// HOMEWORK HISTORY ARRAY
+// =========================
+
+let homeworkHistory = [];
 const API_URL =
 "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQedCG_AZqQGC3MrWOFEGPsnbBOnwaQtcMtluTD5zHm5Rg1kTtO2y5QjwdGdNAP_hzqlL-lxi-IrVv6Xsxwu6r9jlamiNmNgZB9aWv_t6eTlkheUv8DeU_6JFJGjB9g3gV9khPmYwrECNCaMtfGlb89yR9dwWDp-Sd4vuBsk1sJmIPXD8lYc_o013cc9tS2MJQSLIMf25RisAUkwslqynQAMgS4rI0zSvYjb-UnrL728sehNRudeeobqkTKc2aGIAudAMhVLwbRNYVk2Aw&lib=McJPM91cHnjLpnVey1OX2be0fLL19UkVS";
 
@@ -754,6 +759,21 @@ async function sendHomework(){
 
     status.innerHTML =
     "✅ Homework Sent Successfully!";
+    // SAVE HISTORY
+
+let today =
+new Date().toLocaleString();
+
+homeworkHistory.unshift({
+
+date: today,
+className: cls,
+subject: subject,
+homework: homework
+
+});
+
+loadHistory();
 
     document.getElementById("class").value = "";
     document.getElementById("subject").value = "";
@@ -838,6 +858,38 @@ else{
 row.style.display = "none";
 
 }
+
+});
+
+}  
+// =========================
+// LOAD HISTORY
+// =========================
+
+function loadHistory(){
+
+let table =
+document.getElementById("historyTable");
+
+table.innerHTML = "";
+
+homeworkHistory.forEach(item => {
+
+table.innerHTML += `
+
+<tr>
+
+<td>${item.date}</td>
+
+<td>${item.className}</td>
+
+<td>${item.subject}</td>
+
+<td>${item.homework}</td>
+
+</tr>
+
+`;
 
 });
 
