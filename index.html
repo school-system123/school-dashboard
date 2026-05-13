@@ -31,6 +31,7 @@
       left:0;
       top:0;
       bottom:0;
+      overflow:auto;
     }
 
     .logo{
@@ -135,7 +136,8 @@
     }
 
     input,
-    textarea{
+    textarea,
+    select{
       width:100%;
       padding:12px;
       border:1px solid #cbd5e1;
@@ -198,6 +200,13 @@
     table th{
       background:#f8fafc;
       color:#334155;
+      position:sticky;
+      top:0;
+    }
+
+    .table-container{
+      overflow:auto;
+      max-height:600px;
     }
 
     @media(max-width:900px){
@@ -261,6 +270,8 @@
     <p>Manage Homework, Students & Notices Professionally</p>
   </div>
 
+  <!-- DASHBOARD -->
+
   <div id="dashboard" class="section">
 
     <div class="cards">
@@ -272,25 +283,55 @@
 
       <div class="card">
         <h3>Total Classes</h3>
-        <h2>13</h2>
+        <h2 id="totalClasses">13</h2>
+      </div>
+
+      <div class="card">
+        <h3>Homework System</h3>
+        <h2>ONLINE</h2>
+      </div>
+
+      <div class="card">
+        <h3>WhatsApp Status</h3>
+        <h2>ACTIVE</h2>
       </div>
 
     </div>
 
   </div>
 
+  <!-- HOMEWORK -->
+
   <div id="homework" class="section panel" style="display:none;">
 
     <h2>📚 Send Homework</h2>
 
     <div class="label">Class</div>
-    <input type="text" id="class" placeholder="Example: 5">
+
+    <select id="class">
+
+      <option value="">Select Class</option>
+      <option>Nursery</option>
+      <option>KG1</option>
+      <option>KG2</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+      <option>10</option>
+
+    </select>
 
     <div class="label">Subject</div>
     <input type="text" id="subject" placeholder="Example: English">
 
     <div class="label">Homework</div>
-    <textarea id="homeworkText"></textarea>
+    <textarea id="homeworkText" placeholder="Write Homework Here..."></textarea>
 
     <button class="btn" onclick="sendHomework()">
       🚀 Send Homework
@@ -300,28 +341,36 @@
 
   </div>
 
+  <!-- STUDENTS -->
+
   <div id="students" class="section panel" style="display:none;">
 
     <h2>👨‍🎓 Student Records</h2>
 
-    <table>
+    <div class="table-container">
 
-      <thead>
+      <table>
 
-        <tr>
-          <th>Student Name</th>
-          <th>Class</th>
-          <th>Father Name</th>
-          <th>Phone</th>
-        </tr>
+        <thead>
 
-      </thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Class</th>
+            <th>Father Name</th>
+            <th>Phone</th>
+          </tr>
 
-      <tbody id="studentTable"></tbody>
+        </thead>
 
-    </table>
+        <tbody id="studentTable"></tbody>
+
+      </table>
+
+    </div>
 
   </div>
+
+  <!-- NOTICES -->
 
   <div id="notices" class="section panel" style="display:none;">
 
@@ -341,9 +390,23 @@
 
 <script>
 
-  // GOOGLE SHEET ID ONLY
+  // =========================
+  // GOOGLE SHEET ID
+  // =========================
+
   const SHEET_ID =
   "1yn4mmeONd9zIVQAi8gb1S0eLeQjZchifwOR_Xs6oOnw";
+
+  // =========================
+  // WHATSAPP BACKEND URL
+  // =========================
+
+  const API_URL =
+  "https://script.google.com/macros/s/AKfycbxTaVG24g4sRyMw5bPML7L94j1G-_ArrJp993uU_BSaiq2QjbmoaCAIH456-6S2M2A/exec";
+
+  // =========================
+  // SHOW SECTION
+  // =========================
 
   function showSection(sectionId){
 
@@ -359,9 +422,13 @@
 
   }
 
+  // =========================
+  // LOAD STUDENTS
+  // =========================
+
   async function loadStudents(){
 
-    let classes = [
+    const classes = [
       "Nursery",
       "KG1",
       "KG2",
@@ -382,69 +449,152 @@
 
     tbody.innerHTML = "";
 
-    let total = 0;
+    let totalStudents = 0;
 
     for(let cls of classes){
 
       try{
 
-        let response = await fetch(
-          `https://opensheet.elk.sh/${SHEET_ID}/${cls}`
-        );
+        let url =
+        `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(cls)}`;
+
+        let response = await fetch(url);
 
         let data = await response.json();
 
-        data.forEach(student => {
+        if(Array.isArray(data)){
 
-          total++;
+          data.forEach(student => {
 
-          tbody.innerHTML += `
+            let studentName =
+            student["Student Name"] ||
+            student["student name"] ||
+            student["Name"] ||
+            "";
 
-          <tr>
-            <td>${student["Student Name"] || ""}</td>
-            <td>${cls}</td>
-            <td>${student["Father Name"] || ""}</td>
-            <td>${student["Phone"] || ""}</td>
-          </tr>
+            let fatherName =
+            student["Father Name"] ||
+            student["father name"] ||
+            "";
 
-          `;
+            let phone =
+            student["Phone"] ||
+            student["phone"] ||
+            student["Contact"] ||
+            "";
 
-        });
+            if(studentName){
+
+              totalStudents++;
+
+              tbody.innerHTML += `
+
+              <tr>
+                <td>${studentName}</td>
+                <td>${cls}</td>
+                <td>${fatherName}</td>
+                <td>${phone}</td>
+              </tr>
+
+              `;
+
+            }
+
+          });
+
+        }
 
       }
 
       catch(error){
 
-        console.log(error);
+        console.log("Class Error:", cls);
 
       }
 
     }
 
     document.getElementById("totalStudents")
-    .innerHTML = total;
+    .innerHTML = totalStudents;
 
   }
+
+  // =========================
+  // SEND HOMEWORK
+  // =========================
 
   async function sendHomework(){
 
     let cls =
-    document.getElementById("class").value;
+    document.getElementById("class").value.trim();
 
     let subject =
-    document.getElementById("subject").value;
+    document.getElementById("subject").value.trim();
 
     let homework =
-    document.getElementById("homeworkText").value;
+    document.getElementById("homeworkText").value.trim();
 
     let status =
     document.getElementById("status");
 
+    if(!cls || !subject || !homework){
+
+      status.style.display = "block";
+      status.className = "status error";
+      status.innerHTML =
+      "❌ Please fill all fields!";
+      return;
+
+    }
+
     status.style.display = "block";
+    status.className = "status";
     status.innerHTML =
-    "✅ Homework Sent Successfully!";
+    "⏳ Sending Homework...";
+
+    try{
+
+      await fetch(API_URL, {
+
+        method:"POST",
+
+        body:JSON.stringify({
+
+          className:cls,
+          subject:subject,
+          homework:homework
+
+        })
+
+      });
+
+      status.className =
+      "status success";
+
+      status.innerHTML =
+      "✅ Homework Sent Successfully!";
+
+      document.getElementById("class").value = "";
+      document.getElementById("subject").value = "";
+      document.getElementById("homeworkText").value = "";
+
+    }
+
+    catch(error){
+
+      status.className =
+      "status error";
+
+      status.innerHTML =
+      "❌ Server Error!";
+
+    }
 
   }
+
+  // =========================
+  // AUTO LOAD
+  // =========================
 
   loadStudents();
 
