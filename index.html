@@ -446,6 +446,46 @@ Professional School ERP Dashboard
   <div id="students" class="section panel" style="display:none;">
 
     <h2>👨‍🎓 Student Records</h2>
+    <div style="
+display:flex;
+gap:15px;
+margin-top:20px;
+margin-bottom:20px;
+flex-wrap:wrap;
+">
+
+<select
+id="classFilter"
+onchange="filterStudents()"
+style="
+padding:12px;
+border:1px solid #cbd5e1;
+border-radius:10px;
+font-size:15px;
+min-width:220px;
+"
+>
+
+<option value="ALL">All Classes</option>
+
+<option value="Nursery">Nursery</option>
+<option value="KG1">KG1</option>
+<option value="KG2">KG2</option>
+
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+
+</select>
+
+</div>
 
     <input
       type="text"
@@ -699,7 +739,41 @@ async function sendHomework(){
 }
 
 /* AUTO LOAD */
+// =========================
+// FILTER STUDENTS
+// =========================
 
+function filterStudents(){
+
+let selectedClass =
+document.getElementById("classFilter").value;
+
+let rows =
+document.querySelectorAll("#studentTable tr");
+
+rows.forEach(row => {
+
+let classCell =
+row.children[1].innerText;
+
+if(
+selectedClass === "ALL" ||
+classCell === selectedClass
+){
+
+row.style.display = "";
+
+}
+
+else{
+
+row.style.display = "none";
+
+}
+
+});
+
+}
 loadStudents();
 
 </script>
