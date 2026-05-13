@@ -22,8 +22,6 @@
       min-height:100vh;
     }
 
-    /* SIDEBAR */
-
     .sidebar{
       width:260px;
       background:#0f172a;
@@ -66,8 +64,6 @@
       background:#2563eb;
     }
 
-    /* MAIN */
-
     .main{
       margin-left:260px;
       width:100%;
@@ -91,8 +87,6 @@
       margin-top:5px;
       color:#64748b;
     }
-
-    /* CARDS */
 
     .cards{
       display:grid;
@@ -118,8 +112,6 @@
       color:#0f172a;
       font-size:30px;
     }
-
-    /* PANELS */
 
     .panel{
       background:white;
@@ -157,12 +149,6 @@
       resize:vertical;
     }
 
-    input:focus,
-    textarea:focus{
-      border-color:#2563eb;
-      box-shadow:0 0 0 3px rgba(37,99,235,0.15);
-    }
-
     .btn{
       width:100%;
       padding:14px;
@@ -174,7 +160,6 @@
       font-size:16px;
       font-weight:bold;
       cursor:pointer;
-      transition:0.3s;
     }
 
     .btn:hover{
@@ -196,8 +181,6 @@
       color:red;
     }
 
-    /* TABLE */
-
     table{
       width:100%;
       border-collapse:collapse;
@@ -216,8 +199,6 @@
       background:#f8fafc;
       color:#334155;
     }
-
-    /* MOBILE */
 
     @media(max-width:900px){
 
@@ -242,221 +223,189 @@
 
 <body>
 
-  <!-- SIDEBAR -->
+<div class="sidebar">
 
-  <div class="sidebar">
+  <div class="logo">
+    <h2>🏫 School ERP</h2>
+    <p style="margin-top:8px;font-size:13px;color:#94a3b8;">
+      Professional Dashboard
+    </p>
+  </div>
 
-    <div class="logo">
-      <h2>🏫 School ERP</h2>
-      <p style="margin-top:8px;font-size:13px;color:#94a3b8;">
-        Professional Dashboard
-      </p>
-    </div>
+  <div class="menu">
 
-    <div class="menu">
+    <button onclick="showSection('dashboard')">
+      📊 Dashboard
+    </button>
 
-      <button onclick="showSection('dashboard')">
-        📊 Dashboard
-      </button>
+    <button onclick="showSection('homework')">
+      📚 Homework
+    </button>
 
-      <button onclick="showSection('homework')">
-        📚 Homework
-      </button>
+    <button onclick="showSection('students')">
+      👨‍🎓 Students
+    </button>
 
-      <button onclick="showSection('students')">
-        👨‍🎓 Students
-      </button>
-
-      <button onclick="showSection('notices')">
-        📢 Notices
-      </button>
-
-    </div>
+    <button onclick="showSection('notices')">
+      📢 Notices
+    </button>
 
   </div>
 
-  <!-- MAIN -->
+</div>
 
-  <div class="main">
+<div class="main">
 
-    <div class="topbar">
-      <h1>School Dashboard System</h1>
-      <p>Manage Homework, Students & Notices Professionally</p>
-    </div>
+  <div class="topbar">
+    <h1>School Dashboard System</h1>
+    <p>Manage Homework, Students & Notices Professionally</p>
+  </div>
 
-    <!-- DASHBOARD -->
+  <div id="dashboard" class="section">
 
-    <div id="dashboard" class="section">
+    <div class="cards">
 
-      <div class="cards">
+      <div class="card">
+        <h3>Total Students</h3>
+        <h2 id="totalStudents">0</h2>
+      </div>
 
-        <div class="card">
-          <h3>Total Students</h3>
-          <h2>250</h2>
-        </div>
-
-        <div class="card">
-          <h3>Total Classes</h3>
-          <h2>12</h2>
-        </div>
-
-        <div class="card">
-          <h3>Homework Sent</h3>
-          <h2>48</h2>
-        </div>
-
-        <div class="card">
-          <h3>Notices</h3>
-          <h2>15</h2>
-        </div>
-
+      <div class="card">
+        <h3>Total Classes</h3>
+        <h2>13</h2>
       </div>
 
     </div>
 
-    <!-- HOMEWORK -->
+  </div>
 
-    <div id="homework" class="section panel" style="display:none;">
+  <div id="homework" class="section panel" style="display:none;">
 
-      <h2>📚 Send Homework</h2>
+    <h2>📚 Send Homework</h2>
 
-      <div class="label">Class</div>
-      <input type="text" id="class" placeholder="Example: 5-A">
+    <div class="label">Class</div>
+    <input type="text" id="class" placeholder="Example: 5">
 
-      <div class="label">Subject</div>
-      <input type="text" id="subject" placeholder="Example: English">
+    <div class="label">Subject</div>
+    <input type="text" id="subject" placeholder="Example: English">
 
-      <div class="label">Homework</div>
-      <textarea id="homeworkText" placeholder="Write Homework Here..."></textarea>
+    <div class="label">Homework</div>
+    <textarea id="homeworkText"></textarea>
 
-      <button class="btn" onclick="sendHomework()">
-        🚀 Send Homework
-      </button>
+    <button class="btn" onclick="sendHomework()">
+      🚀 Send Homework
+    </button>
 
-      <div id="status" class="status"></div>
-
-    </div>
-
-    <!-- STUDENTS -->
-
-    <div id="students" class="section panel" style="display:none;">
-
-      <h2>👨‍🎓 Student Records</h2>
-
-      <table>
-
-        <thead>
-
-          <tr>
-            <th>Student Name</th>
-            <th>Class</th>
-            <th>Father Name</th>
-            <th>Phone</th>
-          </tr>
-
-        </thead>
-
-        <tbody id="studentTable">
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-    <!-- NOTICES -->
-
-    <div id="notices" class="section panel" style="display:none;">
-
-      <h2>📢 School Notices</h2>
-
-      <div class="label">Notice Title</div>
-      <input type="text" placeholder="Example: Parent Meeting">
-
-      <div class="label">Notice Details</div>
-      <textarea placeholder="Write Notice Here..."></textarea>
-
-      <button class="btn">
-        📤 Publish Notice
-      </button>
-
-    </div>
+    <div id="status" class="status"></div>
 
   </div>
 
+  <div id="students" class="section panel" style="display:none;">
+
+    <h2>👨‍🎓 Student Records</h2>
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Student Name</th>
+          <th>Class</th>
+          <th>Father Name</th>
+          <th>Phone</th>
+        </tr>
+
+      </thead>
+
+      <tbody id="studentTable"></tbody>
+
+    </table>
+
+  </div>
+
+  <div id="notices" class="section panel" style="display:none;">
+
+    <h2>📢 School Notices</h2>
+
+    <input type="text" placeholder="Notice Title">
+
+    <textarea placeholder="Notice Details"></textarea>
+
+    <button class="btn">
+      Publish Notice
+    </button>
+
+  </div>
+
+</div>
+
 <script>
 
-  // =========================
-  // GOOGLE SHEET ID
-  // =========================
-
+  // GOOGLE SHEET ID ONLY
   const SHEET_ID =
-  "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnRq-5j-4x3SJwVzHrhcHmWv1CCPTHNZ--SppWf62gtL754HSAgD0plFjz0pSaf0FyybBDSb04SvcIkyoTaUzm9VAOGm8L-mLvulvoRR912h-to_lqG4pO8Hbfu9zRVG-VK3V3aNcX5XsU-d7aQTt73Qk-1-B1KBmsoNvVcGc2Pv6Iyjnhs6y4jEuMIOlbset5ww1GEK_Z41ErvC3RGJnT-OtDatmdGrmWkaKYZtZtNJmqa4nMUpZM8FCwPSj_5TcHenWpvutEmbDqgD7fE&lib=McJPM91cHnjLpnVey1OX2be0fLL19UkVS";
-
-  // =========================
-  // SHOW SECTIONS
-  // =========================
+  "1yn4mmeONd9zIVQAi8gb1S0eLeQjZchifwOR_Xs6oOnw";
 
   function showSection(sectionId){
 
-    let sections = document.querySelectorAll(".section");
+    let sections =
+    document.querySelectorAll(".section");
 
     sections.forEach(section => {
       section.style.display = "none";
     });
 
-    document.getElementById(sectionId).style.display = "block";
+    document.getElementById(sectionId)
+    .style.display = "block";
 
   }
 
-  // =========================
-  // LOAD STUDENTS
-  // =========================
-
   async function loadStudents(){
 
-    try{
+    let classes = [
+      "Nursery",
+      "KG1",
+      "KG2",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ];
 
-      let classes = [
-        "Nursery",
-        "KG1",
-        "KG2",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10"
-      ];
+    let tbody =
+    document.getElementById("studentTable");
 
-      let tbody =
-      document.getElementById("studentTable");
+    tbody.innerHTML = "";
 
-      tbody.innerHTML = "";
+    let total = 0;
 
-      for(let cls of classes){
+    for(let cls of classes){
 
-        let url =
-        `https://opensheet.elk.sh/${SHEET_ID}/${cls}`;
+      try{
 
-        let response = await fetch(url);
+        let response = await fetch(
+          `https://opensheet.elk.sh/${SHEET_ID}/${cls}`
+        );
 
         let data = await response.json();
 
         data.forEach(student => {
 
+          total++;
+
           tbody.innerHTML += `
 
-            <tr>
-              <td>${student["Student Name"] || ""}</td>
-              <td>${cls}</td>
-              <td>${student["Father Name"] || ""}</td>
-              <td>${student["Phone"] || ""}</td>
-            </tr>
+          <tr>
+            <td>${student["Student Name"] || ""}</td>
+            <td>${cls}</td>
+            <td>${student["Father Name"] || ""}</td>
+            <td>${student["Phone"] || ""}</td>
+          </tr>
 
           `;
 
@@ -464,116 +413,38 @@
 
       }
 
+      catch(error){
+
+        console.log(error);
+
+      }
+
     }
 
-    catch(error){
-
-      console.log(error);
-
-    }
+    document.getElementById("totalStudents")
+    .innerHTML = total;
 
   }
-
-  // =========================
-  // SEND HOMEWORK
-  // =========================
 
   async function sendHomework(){
 
     let cls =
-    document.getElementById("class").value.trim();
+    document.getElementById("class").value;
 
     let subject =
-    document.getElementById("subject").value.trim();
+    document.getElementById("subject").value;
 
     let homework =
-    document.getElementById("homeworkText").value.trim();
+    document.getElementById("homeworkText").value;
 
     let status =
     document.getElementById("status");
 
-    if(!cls || !subject || !homework){
-
-      status.style.display = "block";
-      status.className = "status error";
-      status.innerHTML =
-      "❌ Please fill all fields!";
-
-      return;
-
-    }
-
     status.style.display = "block";
-    status.className = "status";
     status.innerHTML =
-    "⏳ Sending Homework...";
-
-    try{
-
-      let response = await fetch(
-      "http://localhost:3000/send-homework",
-
-      {
-
-        method:"POST",
-
-        headers:{
-          "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify({
-
-          className:cls,
-          subject:subject,
-          homework:homework
-
-        })
-
-      });
-
-      let data = await response.json();
-
-      if(data.success){
-
-        status.className =
-        "status success";
-
-        status.innerHTML =
-        "✅ Homework Sent Successfully!";
-
-        document.getElementById("class").value = "";
-        document.getElementById("subject").value = "";
-        document.getElementById("homeworkText").value = "";
-
-      }
-
-      else{
-
-        status.className =
-        "status error";
-
-        status.innerHTML =
-        "❌ Failed to Send Homework!";
-
-      }
-
-    }
-
-    catch(err){
-
-      status.className =
-      "status error";
-
-      status.innerHTML =
-      "❌ Server Connection Error!";
-
-    }
+    "✅ Homework Sent Successfully!";
 
   }
-
-  // =========================
-  // AUTO LOAD
-  // =========================
 
   loadStudents();
 
