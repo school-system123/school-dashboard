@@ -423,63 +423,65 @@
 
   async function loadStudents(){
 
-    try{
+  try{
 
-      let response =
-      await fetch(API_URL);
+    let response =
+    await fetch(API_URL);
 
-      let data =
-      await response.json();
+    let data =
+    await response.json();
 
-      let tbody =
-      document.getElementById("studentTable");
+    let tbody =
+    document.getElementById("studentTable");
 
-      tbody.innerHTML = "";
+    tbody.innerHTML = "";
 
-      let total = 0;
+    let total = 0;
 
-      // ALL SHEETS LOOP
+    // OBJECT LOOP
 
-      data.forEach(sheet => {
+    Object.keys(data).forEach(className => {
 
-        sheet.forEach(student => {
+      let students = data[className];
 
-          total++;
+      students.forEach(student => {
 
-          tbody.innerHTML += `
+        total++;
 
-          <tr>
+        tbody.innerHTML += `
 
-            <td>${student.student || ""}</td>
+        <tr>
 
-            <td>${student.class || ""}</td>
+          <td>${student.student || ""}</td>
 
-            <td>${student.father || ""}</td>
+          <td>${className}</td>
 
-            <td>${student.phone || ""}</td>
+          <td>${student.father || ""}</td>
 
-          </tr>
+          <td>${student.phone || ""}</td>
 
-          `;
+        </tr>
 
-        });
+        `;
 
       });
 
-      document.getElementById("totalStudents")
-      .innerHTML = total;
+    });
 
-    }
-
-    catch(error){
-
-      console.log(error);
-
-      alert("Student Data Load Error");
-
-    }
+    document.getElementById("totalStudents")
+    .innerHTML = total;
 
   }
+
+  catch(error){
+
+    console.log(error);
+
+    alert("Student Data Load Error");
+
+  }
+
+}
 
   // =========================
   // SEND HOMEWORK
