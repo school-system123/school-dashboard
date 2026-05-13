@@ -393,11 +393,11 @@
 <script>
 
   // =========================
-  // CHANGE THIS URL
+  // GOOGLE APPS SCRIPT URL
   // =========================
 
   const API_URL =
-  "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+  "https://script.google.com/macros/s/AKfycbxTaVG24g4sRyMw5bPML7L94j1G-_ArrJp993uU_BSaiq2QjbmoaCAIH456-6S2M2A/exec";
 
   // =========================
   // SHOW SECTION
@@ -438,25 +438,31 @@
 
       let total = 0;
 
-      data.forEach(student => {
+      // ALL SHEETS LOOP
 
-        total++;
+      data.forEach(sheet => {
 
-        tbody.innerHTML += `
+        sheet.forEach(student => {
 
-        <tr>
+          total++;
 
-          <td>${student.name || ""}</td>
+          tbody.innerHTML += `
 
-          <td>${student.class || ""}</td>
+          <tr>
 
-          <td>${student.father || ""}</td>
+            <td>${student.student || ""}</td>
 
-          <td>${student.phone || ""}</td>
+            <td>${student.class || ""}</td>
 
-        </tr>
+            <td>${student.father || ""}</td>
 
-        `;
+            <td>${student.phone || ""}</td>
+
+          </tr>
+
+          `;
+
+        });
 
       });
 
