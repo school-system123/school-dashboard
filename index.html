@@ -3,12 +3,9 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>School Dashboard System</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <style>
 
@@ -69,7 +66,7 @@
       background:#2563eb;
     }
 
-    /* MAIN CONTENT */
+    /* MAIN */
 
     .main{
       margin-left:260px;
@@ -95,7 +92,7 @@
       color:#64748b;
     }
 
-    /* DASHBOARD CARDS */
+    /* CARDS */
 
     .cards{
       display:grid;
@@ -146,8 +143,7 @@
     }
 
     input,
-    textarea,
-    select{
+    textarea{
       width:100%;
       padding:12px;
       border:1px solid #cbd5e1;
@@ -162,8 +158,7 @@
     }
 
     input:focus,
-    textarea:focus,
-    select:focus{
+    textarea:focus{
       border-color:#2563eb;
       box-shadow:0 0 0 3px rgba(37,99,235,0.15);
     }
@@ -355,27 +350,13 @@
           <tr>
             <th>Student Name</th>
             <th>Class</th>
-            <th>Parent Name</th>
+            <th>Father Name</th>
             <th>Phone</th>
           </tr>
 
         </thead>
 
-        <tbody>
-
-          <tr>
-            <td>Ali Khan</td>
-            <td>5-A</td>
-            <td>Ahmed Khan</td>
-            <td>03001234567</td>
-          </tr>
-
-          <tr>
-            <td>Sara Ahmed</td>
-            <td>6-B</td>
-            <td>Imran Ahmed</td>
-            <td>03111234567</td>
-          </tr>
+        <tbody id="studentTable">
 
         </tbody>
 
@@ -405,6 +386,17 @@
 
 <script>
 
+  // =========================
+  // GOOGLE SHEET ID
+  // =========================
+
+  const SHEET_ID =
+  "1yn4mmeONd9zIVQAi8gb1S0eLeQjZchifwOR_Xs6oOnw";
+
+  // =========================
+  // SHOW SECTIONS
+  // =========================
+
   function showSection(sectionId){
 
     let sections = document.querySelectorAll(".section");
@@ -417,30 +409,111 @@
 
   }
 
+  // =========================
+  // LOAD STUDENTS
+  // =========================
+
+  async function loadStudents(){
+
+    try{
+
+      let classes = [
+        "Nursery",
+        "KG1",
+        "KG2",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ];
+
+      let tbody =
+      document.getElementById("studentTable");
+
+      tbody.innerHTML = "";
+
+      for(let cls of classes){
+
+        let url =
+        `https://opensheet.elk.sh/${SHEET_ID}/${cls}`;
+
+        let response = await fetch(url);
+
+        let data = await response.json();
+
+        data.forEach(student => {
+
+          tbody.innerHTML += `
+
+            <tr>
+              <td>${student["Student Name"] || ""}</td>
+              <td>${cls}</td>
+              <td>${student["Father Name"] || ""}</td>
+              <td>${student["Phone"] || ""}</td>
+            </tr>
+
+          `;
+
+        });
+
+      }
+
+    }
+
+    catch(error){
+
+      console.log(error);
+
+    }
+
+  }
+
+  // =========================
+  // SEND HOMEWORK
+  // =========================
+
   async function sendHomework(){
 
-    let cls = document.getElementById("class").value.trim();
-    let subject = document.getElementById("subject").value.trim();
-    let homework = document.getElementById("homeworkText").value.trim();
+    let cls =
+    document.getElementById("class").value.trim();
 
-    let status = document.getElementById("status");
+    let subject =
+    document.getElementById("subject").value.trim();
+
+    let homework =
+    document.getElementById("homeworkText").value.trim();
+
+    let status =
+    document.getElementById("status");
 
     if(!cls || !subject || !homework){
 
       status.style.display = "block";
       status.className = "status error";
-      status.innerHTML = "❌ Please fill all fields!";
+      status.innerHTML =
+      "❌ Please fill all fields!";
+
       return;
 
     }
 
     status.style.display = "block";
     status.className = "status";
-    status.innerHTML = "⏳ Sending Homework...";
+    status.innerHTML =
+    "⏳ Sending Homework...";
 
     try{
 
-      let response = await fetch("http://localhost:3000/send-homework", {
+      let response = await fetch(
+      "http://localhost:3000/send-homework",
+
+      {
 
         method:"POST",
 
@@ -449,9 +522,11 @@
         },
 
         body:JSON.stringify({
+
           className:cls,
           subject:subject,
           homework:homework
+
         })
 
       });
@@ -460,8 +535,11 @@
 
       if(data.success){
 
-        status.className = "status success";
-        status.innerHTML = "✅ Homework Sent Successfully!";
+        status.className =
+        "status success";
+
+        status.innerHTML =
+        "✅ Homework Sent Successfully!";
 
         document.getElementById("class").value = "";
         document.getElementById("subject").value = "";
@@ -471,8 +549,11 @@
 
       else{
 
-        status.className = "status error";
-        status.innerHTML = "❌ Failed to Send Homework!";
+        status.className =
+        "status error";
+
+        status.innerHTML =
+        "❌ Failed to Send Homework!";
 
       }
 
@@ -480,12 +561,21 @@
 
     catch(err){
 
-      status.className = "status error";
-      status.innerHTML = "❌ Server Connection Error!";
+      status.className =
+      "status error";
+
+      status.innerHTML =
+      "❌ Server Connection Error!";
 
     }
 
   }
+
+  // =========================
+  // AUTO LOAD
+  // =========================
+
+  loadStudents();
 
 </script>
 
