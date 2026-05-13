@@ -391,14 +391,7 @@
 <script>
 
   // =========================
-  // GOOGLE SHEET ID
-  // =========================
-
-  const SHEET_ID =
-  "1yn4mmeONd9zIVQAi8gb1S0eLeQjZchifwOR_Xs6oOnw";
-
-  // =========================
-  // WHATSAPP BACKEND URL
+  // GOOGLE APPS SCRIPT URL
   // =========================
 
   const API_URL =
@@ -428,50 +421,50 @@
 
   async function loadStudents(){
 
-  try{
+    try{
 
-    let response = await fetch(
-      "https://script.google.com/macros/s/AKfycbxTaVG24g4sRyMw5bPML7L94j1G-_ArrJp993uU_BSaiq2QjbmoaCAIH456-6S2M2A/exec"
-    );
+      let response =
+      await fetch(API_URL);
 
-    let data = await response.json();
+      let students =
+      await response.json();
 
-    let tbody =
-    document.getElementById("studentTable");
+      let tbody =
+      document.getElementById("studentTable");
 
-    tbody.innerHTML = "";
+      tbody.innerHTML = "";
 
-    let total = 0;
+      let total = 0;
 
-    data.forEach(student => {
+      students.forEach(student => {
 
-      total++;
+        total++;
 
-      tbody.innerHTML += `
+        tbody.innerHTML += `
 
-      <tr>
-        <td>${student["Student Name"] || ""}</td>
-        <td>${student["Class"] || ""}</td>
-        <td>${student["Father Name"] || ""}</td>
-        <td>${student["Phone"] || ""}</td>
-      </tr>
+        <tr>
+          <td>${student.name || ""}</td>
+          <td>${student.class || ""}</td>
+          <td>${student.father || ""}</td>
+          <td>${student.phone || ""}</td>
+        </tr>
 
-      `;
+        `;
 
-    });
+      });
 
-    document.getElementById("totalStudents")
-    .innerHTML = total;
+      document.getElementById("totalStudents")
+      .innerHTML = total;
+
+    }
+
+    catch(error){
+
+      console.log(error);
+
+    }
 
   }
-
-  catch(error){
-
-    console.log(error);
-
-  }
-
-}
 
   // =========================
   // SEND HOMEWORK
@@ -480,13 +473,13 @@
   async function sendHomework(){
 
     let cls =
-    document.getElementById("class").value.trim();
+    document.getElementById("class").value;
 
     let subject =
-    document.getElementById("subject").value.trim();
+    document.getElementById("subject").value;
 
     let homework =
-    document.getElementById("homeworkText").value.trim();
+    document.getElementById("homeworkText").value;
 
     let status =
     document.getElementById("status");
@@ -496,7 +489,8 @@
       status.style.display = "block";
       status.className = "status error";
       status.innerHTML =
-      "❌ Please fill all fields!";
+      "❌ Please fill all fields";
+
       return;
 
     }
@@ -508,9 +502,16 @@
 
     try{
 
-      await fetch(API_URL, {
+      await fetch(
+      "http://localhost:3000/send-homework",
+
+      {
 
         method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
 
         body:JSON.stringify({
 
@@ -540,7 +541,7 @@
       "status error";
 
       status.innerHTML =
-      "❌ Server Error!";
+      "❌ Server Error";
 
     }
 
