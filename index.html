@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>THE EDUCATION FOUNTAIN MODEL SCHOOL</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
 font-family:'Poppins',sans-serif;
 background:#020617;
@@ -27,6 +36,50 @@ select option{
 background:#0f172a;
 color:white;
 }
+
+/* LOADER */
+
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(2,6,23,0.85);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999999;
+backdrop-filter:blur(5px);
+}
+
+.loader-box{
+text-align:center;
+}
+
+.spinner{
+width:70px;
+height:70px;
+border:7px solid rgba(255,255,255,0.1);
+border-top:7px solid #2563eb;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin:auto;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+.loader-box p{
+margin-top:20px;
+font-size:18px;
+font-weight:700;
+}
+
+/* LOGIN */
 
 #loginScreen{
 position:fixed;
@@ -72,7 +125,8 @@ background:rgba(255,255,255,0.08);
 color:white;
 }
 
-.login-btn,.forgot-btn{
+.login-btn,
+.forgot-btn{
 width:100%;
 padding:16px;
 margin-top:15px;
@@ -98,6 +152,8 @@ text-align:center;
 color:#ef4444;
 font-weight:700;
 }
+
+/* SIDEBAR */
 
 .sidebar{
 position:fixed;
@@ -131,11 +187,15 @@ color:white;
 text-align:left;
 cursor:pointer;
 font-weight:600;
+transition:0.3s;
 }
 
 .menu button:hover{
 background:linear-gradient(135deg,#2563eb,#7c3aed);
+transform:translateX(5px);
 }
+
+/* MAIN */
 
 .main{
 margin-left:280px;
@@ -178,7 +238,9 @@ margin-bottom:25px;
 margin-bottom:20px;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
 width:100%;
 padding:15px;
 border:none;
@@ -198,6 +260,11 @@ background:linear-gradient(135deg,#2563eb,#7c3aed);
 color:white;
 font-weight:700;
 cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
 }
 
 .table-container{
@@ -231,242 +298,685 @@ border-radius:15px;
 background:rgba(255,255,255,0.06);
 }
 
+.status{
+margin-top:15px;
+font-weight:700;
+}
+
 @media(max-width:900px){
+
 .sidebar{
 position:relative;
 width:100%;
 height:auto;
 }
+
 .main{
 margin-left:0;
 }
+
 }
+
 </style>
 </head>
+
 <body>
 
+<!-- LOADER -->
+
+<div id="loader">
+<div class="loader-box">
+<div class="spinner"></div>
+<p>Please Wait...</p>
+</div>
+</div>
+
+<!-- LOGIN -->
+
 <div id="loginScreen">
+
 <div class="login-box">
+
 <h1>🏫 SCHOOL ERP</h1>
+
 <p>THE EDUCATION FOUNTAIN MODEL SCHOOL</p>
 
-<input type="email" id="loginUsername" placeholder="Admin Gmail">
-<input type="password" id="loginPassword" placeholder="Password">
+<input type="email"
+id="loginUsername"
+placeholder="Admin Gmail">
 
-<button class="login-btn" onclick="loginSystem()">🔐 LOGIN</button>
-<button class="forgot-btn" onclick="resetPassword()">🔑 Forgot Password</button>
+<input type="password"
+id="loginPassword"
+placeholder="Password">
 
-<div id="error">❌ Invalid Email or Password</div>
+<button class="login-btn"
+onclick="loginSystem()">
+
+🔐 LOGIN
+
+</button>
+
+<button class="forgot-btn"
+onclick="resetPassword()">
+
+🔑 Forgot Password
+
+</button>
+
+<div id="error">
+
+❌ Invalid Email or Password
+
 </div>
+
 </div>
+
+</div>
+
+<!-- SIDEBAR -->
 
 <div class="sidebar">
+
 <div class="logo">
-<h1>THE EDUCATION FOUNTAIN MODEL SCHOOL</h1>
+
+<h1>
+THE EDUCATION FOUNTAIN MODEL SCHOOL
+</h1>
+
 </div>
 
 <div class="menu">
-<button onclick="showSection('dashboard')">Dashboard</button>
-<button onclick="showSection('homework')">Homework</button>
-<button onclick="showSection('students')">Students</button>
-<button onclick="showSection('history')">History</button>
-<button onclick="showSection('fees')">Fees</button>
-<button onclick="logoutSystem()">Logout</button>
+
+<button onclick="showSection('dashboard')">
+📊 Dashboard
+</button>
+
+<button onclick="showSection('homework')">
+📚 Homework
+</button>
+
+<button onclick="showSection('students')">
+👨‍🎓 Students
+</button>
+
+<button onclick="showSection('history')">
+🕘 History
+</button>
+
+<button onclick="showSection('fees')">
+💰 Fees
+</button>
+
+<button onclick="logoutSystem()">
+🚪 Logout
+</button>
+
 </div>
+
 </div>
+
+<!-- MAIN -->
 
 <div class="main">
 
 <div class="topbar">
+
 <h1>School Management Dashboard</h1>
+
 <p id="liveDate"></p>
+
 </div>
 
+<!-- DASHBOARD -->
+
 <div id="dashboard" class="section">
+
 <div class="cards">
-<div class="card"><h3>Total Students</h3><h2 id="totalStudents">0</h2></div>
-<div class="card"><h3>Total Classes</h3><h2 id="totalClasses">0</h2></div>
-<div class="card"><h3>WhatsApp</h3><h2 id="waStatus">CHECKING...</h2></div>
-<div class="card"><h3>System</h3><h2>ONLINE</h2></div>
+
+<div class="card">
+<h3>Total Students</h3>
+<h2 id="totalStudents">0</h2>
+</div>
+
+<div class="card">
+<h3>Total Classes</h3>
+<h2 id="totalClasses">0</h2>
+</div>
+
+<div class="card">
+<h3>WhatsApp</h3>
+<h2 id="waStatus">CHECKING...</h2>
+</div>
+
+<div class="card">
+<h3>System</h3>
+<h2>ONLINE</h2>
+</div>
+
 </div>
 
 <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;">
+
 <div class="panel">
+
 <h2>📈 Students Analytics</h2>
-<div class="chart-box"><canvas id="myChart"></canvas></div>
+
+<div class="chart-box">
+<canvas id="myChart"></canvas>
+</div>
+
 </div>
 
 <div class="panel">
+
 <h2>🔥 Recent Activity</h2>
+
 <div id="activityList"></div>
-</div>
-</div>
+
 </div>
 
-<div id="homework" class="section panel" style="display:none;">
+</div>
+
+</div>
+
+<!-- HOMEWORK -->
+
+<div id="homework"
+class="section panel"
+style="display:none;">
+
 <h2>📚 Send Homework</h2>
+
 <select id="class"></select>
-<input type="text" id="subject" placeholder="Subject">
-<textarea id="homeworkText" placeholder="Write Homework"></textarea>
-<button class="btn" onclick="sendHomework()">SEND HOMEWORK</button>
-<div id="status"></div>
+
+<input type="text"
+id="subject"
+placeholder="Subject">
+
+<textarea id="homeworkText"
+placeholder="Write Homework"></textarea>
+
+<button class="btn"
+onclick="sendHomework()">
+
+SEND HOMEWORK
+
+</button>
+
+<div id="status" class="status"></div>
+
 </div>
 
-<div id="students" class="section panel" style="display:none;">
+<!-- STUDENTS -->
+
+<div id="students"
+class="section panel"
+style="display:none;">
+
 <h2>👨‍🎓 Student Records</h2>
-<input type="text" id="searchStudent" placeholder="Search Student" onkeyup="searchStudent()">
+
+<input type="text"
+id="searchStudent"
+placeholder="Search Student"
+onkeyup="searchStudent()">
+
 <div class="table-container">
+
 <table>
+
 <thead>
-<tr><th>Name</th><th>Class</th><th>Father</th><th>Phone</th></tr>
+<tr>
+<th>Name</th>
+<th>Class</th>
+<th>Father</th>
+<th>Phone</th>
+</tr>
 </thead>
+
 <tbody id="studentTable"></tbody>
+
 </table>
-</div>
+
 </div>
 
-<div id="history" class="section panel" style="display:none;">
+</div>
+
+<!-- HISTORY -->
+
+<div id="history"
+class="section panel"
+style="display:none;">
+
 <h2>🕘 Homework History</h2>
+
 <div class="table-container">
+
 <table>
+
 <thead>
-<tr><th>Date</th><th>Class</th><th>Subject</th><th>Homework</th></tr>
+<tr>
+<th>Date</th>
+<th>Class</th>
+<th>Subject</th>
+<th>Homework</th>
+</tr>
 </thead>
+
 <tbody id="historyTable"></tbody>
+
 </table>
-</div>
+
 </div>
 
-<div id="fees" class="section panel" style="display:none;">
+</div>
+
+<!-- FEES -->
+
+<div id="fees"
+class="section panel"
+style="display:none;">
+
 <h2>💰 Fee Reminder</h2>
+
 <select id="feeClass"></select>
+
 <textarea id="feeMessage">Dear Parents, Please submit school fee on time.</textarea>
-<button class="btn" onclick="sendFeeReminder()">SEND FEE REMINDER</button>
-<div id="feeStatus"></div>
+
+<button class="btn"
+onclick="sendFeeReminder()">
+
+SEND FEE REMINDER
+
+</button>
+
+<div id="feeStatus" class="status"></div>
+
 </div>
 
 </div>
 
 <script>
-const API_URL='https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQedCG_AZqQGC3MrWOFEGPsnbBOnwaQtcMtluTD5zHm5Rg1kTtO2y5QjwdGdNAP_hzqlL-lxi-IrVv6Xsxwu6r9jlamiNmNgZB9aWv_t6eTlkheUv8DeU_6JFJGjB9g3gV9khPmYwrECNCaMtfGlb89yR9dwWDp-Sd4vuBsk1sJmIPXD8lYc_o013cc9tS2MJQSLIMf25RisAUkwslqynQAMgS4rI0zSvYjb-UnrL728sehNRudeeobqkTKc2aGIAudAMhVLwbRNYVk2Aw&lib=McJPM91cHnjLpnVey1OX2be0fLL19UkVS';
 
-let analyticsData={};
-let homeworkHistory=[];
-let recentActivities=[];
+const API_URL =
+'https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQedCG_AZqQGC3MrWOFEGPsnbBOnwaQtcMtluTD5zHm5Rg1kTtO2y5QjwdGdNAP_hzqlL-lxi-IrVv6Xsxwu6r9jlamiNmNgZB9aWv_t6eTlkheUv8DeU_6JFJGjB9g3gV9khPmYwrECNCaMtfGlb89yR9dwWDp-Sd4vuBsk1sJmIPXD8lYc_o013cc9tS2MJQSLIMf25RisAUkwslqynQAMgS4rI0zSvYjb-UnrL728sehNRudeeobqkTKc2aGIAudAMhVLwbRNYVk2Aw&lib=McJPM91cHnjLpnVey1OX2be0fLL19UkVS';
+
+let analyticsData = {};
+let homeworkHistory = [];
+let recentActivities = [];
 let myChart;
 
-function showSection(id){
-document.querySelectorAll('.section').forEach(sec=>sec.style.display='none');
-document.getElementById(id).style.display='block';
+/* LOADER */
+
+function showLoader(){
+document.getElementById('loader').style.display='flex';
 }
 
+function hideLoader(){
+document.getElementById('loader').style.display='none';
+}
+
+/* SECTION */
+
+function showSection(id){
+
+document.querySelectorAll('.section').forEach(sec=>{
+sec.style.display='none';
+});
+
+document.getElementById(id).style.display='block';
+
+}
+
+/* ACTIVITY */
+
 function addActivity(message){
+
 recentActivities.unshift({
 time:new Date().toLocaleTimeString(),
 message
 });
-if(recentActivities.length>6) recentActivities.pop();
+
+if(recentActivities.length>8){
+recentActivities.pop();
+}
+
 renderActivities();
+
 }
 
 function renderActivities(){
-let container=document.getElementById('activityList');
+
+let container =
+document.getElementById('activityList');
+
 container.innerHTML='';
+
 recentActivities.forEach(item=>{
-container.innerHTML+=`<div class="activity-item"><div style="font-size:12px;color:#94a3b8;margin-bottom:6px;">${item.time}</div>${item.message}</div>`;
+
+container.innerHTML += `
+<div class="activity-item">
+<div style="font-size:12px;color:#94a3b8;margin-bottom:6px;">
+${item.time}
+</div>
+${item.message}
+</div>
+`;
+
 });
+
 }
 
-async function loadStudents(){
-try{
-const response=await fetch(API_URL);
-const data=await response.json();
+/* LOAD STUDENTS */
 
-const tbody=document.getElementById('studentTable');
-const classSelect=document.getElementById('class');
-const feeClass=document.getElementById('feeClass');
+async function loadStudents(){
+
+try{
+
+showLoader();
+
+const response =
+await fetch(API_URL);
+
+const data =
+await response.json();
+
+const tbody =
+document.getElementById('studentTable');
+
+const classSelect =
+document.getElementById('class');
+
+const feeClass =
+document.getElementById('feeClass');
 
 tbody.innerHTML='';
-classSelect.innerHTML='<option value="">Select Class</option>';
-feeClass.innerHTML='<option value="">Select Class</option>';
+
+classSelect.innerHTML =
+'<option value="">Select Class</option>';
+
+feeClass.innerHTML =
+'<option value="">Select Class</option>';
 
 analyticsData={};
+
 let total=0;
 
 Object.keys(data).forEach(className=>{
+
 if(!Array.isArray(data[className])) return;
 
-analyticsData[className]=data[className].length;
-total+=data[className].length;
+analyticsData[className] =
+data[className].length;
 
-classSelect.innerHTML+=`<option>${className}</option>`;
-feeClass.innerHTML+=`<option>${className}</option>`;
+total += data[className].length;
+
+classSelect.innerHTML += `
+<option>${className}</option>
+`;
+
+feeClass.innerHTML += `
+<option>${className}</option>
+`;
 
 data[className].forEach(student=>{
-tbody.innerHTML+=`<tr><td>${student.student||''}</td><td>${className}</td><td>${student.father||''}</td><td>${student.phone||''}</td></tr>`;
-});
+
+tbody.innerHTML += `
+<tr>
+<td>${student.student || ''}</td>
+<td>${className}</td>
+<td>${student.father || ''}</td>
+<td>${student.phone || ''}</td>
+</tr>
+`;
+
 });
 
-document.getElementById('totalStudents').innerHTML=total;
-document.getElementById('totalClasses').innerHTML=Object.keys(analyticsData).length;
+});
+
+document.getElementById('totalStudents')
+.innerHTML = total;
+
+document.getElementById('totalClasses')
+.innerHTML = Object.keys(analyticsData).length;
 
 loadChart();
-addActivity(`👨‍🎓 ${total} students loaded successfully`);
+
+addActivity(
+`👨‍🎓 ${total} students loaded successfully`
+);
+
+hideLoader();
 
 }catch(error){
+
+hideLoader();
+
 console.log(error);
+
 }
+
 }
+
+/* SEARCH */
 
 function searchStudent(){
-let input=document.getElementById('searchStudent').value.toLowerCase();
-let rows=document.querySelectorAll('#studentTable tr');
+
+let input =
+document.getElementById('searchStudent')
+.value.toLowerCase();
+
+let rows =
+document.querySelectorAll('#studentTable tr');
+
 rows.forEach(row=>{
-row.style.display=row.innerText.toLowerCase().includes(input)?'':'none';
+
+row.style.display =
+row.innerText.toLowerCase().includes(input)
+? ''
+: 'none';
+
 });
+
 }
+
+/* SEND HOMEWORK */
 
 async function sendHomework(){
-let cls=document.getElementById('class').value;
-let subject=document.getElementById('subject').value;
-let homework=document.getElementById('homeworkText').value;
 
-if(!cls||!subject||!homework){
+let cls =
+document.getElementById('class').value;
+
+let subject =
+document.getElementById('subject').value;
+
+let homework =
+document.getElementById('homeworkText').value;
+
+if(!cls || !subject || !homework){
+
 alert('Fill all fields');
+
 return;
+
 }
 
+showLoader();
+
+document.getElementById('status')
+.innerHTML='⏳ Sending Homework...';
+
 try{
-let response=await fetch('http://localhost:3000/send-homework',{
+
+let response =
+await fetch('http://localhost:3000/send-homework',{
+
 method:'POST',
-headers:{'Content-Type':'application/json'},
+
+headers:{
+'Content-Type':'application/json'
+},
+
 body:JSON.stringify({
 className:cls,
 subject,
 homework
 })
+
 });
 
-let result=await response.json();
+let result =
+await response.json();
 
 if(result.success){
-document.getElementById('status').innerHTML='✅ Homework Sent Successfully';
-addActivity(`📚 Homework sent to ${cls}`);
+
+document.getElementById('status')
+.innerHTML =
+`✅ Homework Sent To ${result.totalSent} Students`;
+
+addActivity(
+`📚 Homework sent to ${cls}`
+);
+
+homeworkHistory.unshift({
+
+date:new Date().toLocaleString(),
+className:cls,
+subject,
+homework
+
+});
+
+loadHistory();
+
 }else{
-document.getElementById('status').innerHTML='❌ Failed To Send';
+
+document.getElementById('status')
+.innerHTML='❌ Failed To Send';
+
 }
 
 }catch(error){
-document.getElementById('status').innerHTML='❌ Server Offline';
+
+document.getElementById('status')
+.innerHTML='❌ Server Offline';
+
 }
+
+hideLoader();
+
 }
+
+/* HISTORY */
+
+function loadHistory(){
+
+let table =
+document.getElementById('historyTable');
+
+table.innerHTML='';
+
+homeworkHistory.forEach(item=>{
+
+table.innerHTML += `
+<tr>
+<td>${item.date}</td>
+<td>${item.className}</td>
+<td>${item.subject}</td>
+<td>${item.homework}</td>
+</tr>
+`;
+
+});
+
+}
+
+/* SEND FEES */
+
+async function sendFeeReminder(){
+
+let cls =
+document.getElementById('feeClass').value;
+
+let message =
+document.getElementById('feeMessage').value;
+
+if(!cls || !message){
+
+alert('Fill all fields');
+
+return;
+
+}
+
+showLoader();
+
+document.getElementById('feeStatus')
+.innerHTML='⏳ Sending Fee Reminder...';
+
+try{
+
+let response =
+await fetch('http://localhost:3000/send-fee-reminder',{
+
+method:'POST',
+
+headers:{
+'Content-Type':'application/json'
+},
+
+body:JSON.stringify({
+className:cls,
+message
+})
+
+});
+
+let result =
+await response.json();
+
+if(result.success){
+
+document.getElementById('feeStatus')
+.innerHTML =
+`✅ Fee Reminder Sent To ${result.totalSent} Students`;
+
+addActivity(
+`💰 Fee reminder sent to ${cls}`
+);
+
+}else{
+
+document.getElementById('feeStatus')
+.innerHTML='❌ Failed To Send';
+
+}
+
+}catch(error){
+
+document.getElementById('feeStatus')
+.innerHTML='❌ Server Offline';
+
+}
+
+hideLoader();
+
+}
+
+/* CHART */
 
 function loadChart(){
-const ctx=document.getElementById('myChart');
-if(myChart) myChart.destroy();
 
-myChart=new Chart(ctx,{
+const ctx =
+document.getElementById('myChart');
+
+if(myChart){
+myChart.destroy();
+}
+
+myChart = new Chart(ctx,{
+
 type:'bar',
+
 data:{
 labels:Object.keys(analyticsData),
 datasets:[{
@@ -476,57 +986,147 @@ borderWidth:1,
 borderRadius:10
 }]
 },
+
 options:{
 responsive:true,
-plugins:{legend:{labels:{color:'white'}}},
+
+plugins:{
+legend:{
+labels:{
+color:'white'
+}
+}
+},
+
 scales:{
-y:{ticks:{color:'white'}},
-x:{ticks:{color:'white'}}
+y:{
+ticks:{
+color:'white'
+}
+},
+x:{
+ticks:{
+color:'white'
 }
 }
+}
+
+}
+
 });
+
 }
+
+/* WHATSAPP */
 
 async function checkWhatsappStatus(){
+
 try{
-let response=await fetch('http://localhost:3000/status');
-let data=await response.json();
-document.getElementById('waStatus').innerHTML=data.connected?'ACTIVE':'INACTIVE';
+
+let response =
+await fetch('http://localhost:3000/status');
+
+let data =
+await response.json();
+
+document.getElementById('waStatus')
+.innerHTML =
+data.connected
+? 'ACTIVE'
+: 'INACTIVE';
+
 }catch(error){
-document.getElementById('waStatus').innerHTML='OFFLINE';
-}
+
+document.getElementById('waStatus')
+.innerHTML='OFFLINE';
+
 }
 
-window.onload=function(){
-loadStudents();
-checkWhatsappStatus();
-document.getElementById('liveDate').innerHTML=new Date().toDateString();
 }
+
+/* LOGIN */
 
 function loginSystem(){
-let email=document.getElementById('loginUsername').value;
-let password=document.getElementById('loginPassword').value;
 
-if(email==='admin@gmail.com' && password==='123456'){
-document.getElementById('loginScreen').style.display='none';
-localStorage.setItem('schoolLogin','true');
+let email =
+document.getElementById('loginUsername')
+.value;
+
+let password =
+document.getElementById('loginPassword')
+.value;
+
+if(
+email==='admin@gmail.com'
+&&
+password==='123456'
+){
+
+document.getElementById('loginScreen')
+.style.display='none';
+
+localStorage.setItem(
+'schoolLogin',
+'true'
+);
+
 }else{
-document.getElementById('error').style.display='block';
+
+document.getElementById('error')
+.style.display='block';
+
 }
+
 }
+
+/* LOGOUT */
 
 function logoutSystem(){
-localStorage.removeItem('schoolLogin');
+
+localStorage.removeItem(
+'schoolLogin'
+);
+
 location.reload();
+
 }
+
+/* RESET */
 
 function resetPassword(){
-alert('Password reset system temporarily disabled');
+
+alert(
+'Password reset system temporarily disabled'
+);
+
 }
 
-if(localStorage.getItem('schoolLogin')==='true'){
-document.getElementById('loginScreen').style.display='none';
+/* AUTO LOGIN */
+
+if(
+localStorage.getItem('schoolLogin')
+==='true'
+){
+
+document.getElementById('loginScreen')
+.style.display='none';
+
 }
+
+/* ONLOAD */
+
+window.onload=function(){
+
+loadStudents();
+
+checkWhatsappStatus();
+
+document.getElementById('liveDate')
+.innerHTML =
+new Date().toDateString();
+
+}
+
 </script>
 
 </body>
