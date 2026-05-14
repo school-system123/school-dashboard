@@ -1107,11 +1107,27 @@ async function loadStudents(){
 
 try{
 
-let response =
-await fetch(API_URL);
+let response = await fetch(API_URL);
 
-let data =
-await response.json();
+if(!response.ok){
+
+throw new Error(
+"Network response failed"
+);
+
+}
+
+let data = await response.json();
+
+console.log(data);
+
+if(typeof data !== "object"){
+
+throw new Error(
+"Invalid JSON Data"
+);
+
+}
 
 let tbody =
 document.getElementById("studentTable");
@@ -1136,6 +1152,8 @@ feeClass.innerHTML =
 
 Object.keys(data).forEach(className=>{
 
+if(!Array.isArray(data[className])) return;
+
 analyticsData[className] =
 data[className].length;
 
@@ -1150,7 +1168,7 @@ classSelect.innerHTML +=
 feeClass.innerHTML +=
 `<option>${className}</option>`;
 
-/* TABLE */
+/* STUDENTS */
 
 data[className].forEach(student=>{
 
@@ -1168,6 +1186,58 @@ tbody.innerHTML += `
 `;
 
 });
+
+});
+
+/* COUNTERS */
+
+animateCounter(
+"totalStudents",
+totalStudents
+);
+
+animateCounter(
+"totalClasses",
+Object.keys(data).length
+);
+
+/* CHART */
+
+loadChart();
+
+/* ACTIVITY */
+
+addActivity(
+`👨‍🎓 ${totalStudents} students loaded successfully`
+);
+
+}catch(error){
+
+console.error(error);
+
+document.getElementById("studentTable")
+.innerHTML = `
+
+<tr>
+
+<td colspan="4"
+style="
+text-align:center;
+padding:30px;
+color:#ef4444;
+font-weight:bold;
+">
+
+❌ Unable To Load Student Data
+
+</td>
+
+</tr>
+
+`;
+
+}
+}
 
 });
 
