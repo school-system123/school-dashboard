@@ -1114,74 +1114,65 @@ document.getElementById('waStatus')
 
 }
 
-/* LOGIN */
+<script>
 
 function loginSystem(){
 
 let email =
-document.getElementById('loginUsername')
-.value;
+document.getElementById('loginUsername').value.trim();
 
 let password =
-document.getElementById('loginPassword')
-.value;
+document.getElementById('loginPassword').value.trim();
 
 if(
-email==='admin@gmail.com'
-&&
-password==='123456'
+email === 'admin@gmail.com' &&
+password === '123456'
 ){
 
-document.getElementById('loginScreen')
-.style.display='none';
+document.getElementById('loginScreen').style.display='none';
 
-localStorage.setItem(
-'schoolLogin',
-'true'
-);
+localStorage.setItem('schoolLogin','true');
 
 }else{
 
-document.getElementById('error')
-.style.display='block';
+document.getElementById('error').style.display='block';
 
 }
 
 }
-
-/* LOGOUT */
 
 function logoutSystem(){
 
-localStorage.removeItem(
-'schoolLogin'
-);
+localStorage.removeItem('schoolLogin');
 
 location.reload();
 
 }
 
-/* RESET */
-
 function resetPassword(){
 
-alert(
-'Password reset system temporarily disabled'
-);
+alert('Contact Admin');
 
 }
 
-/* AUTO LOGIN */
+window.onload=function(){
 
-if(
-localStorage.getItem('schoolLogin')
-==='true'
-){
+loadStudents();
 
-document.getElementById('loginScreen')
-.style.display='none';
+checkWhatsappStatus();
+
+document.getElementById('liveDate').innerHTML =
+new Date().toDateString();
+
+if(localStorage.getItem('schoolLogin')==='true'){
+
+document.getElementById('loginScreen').style.display='none';
 
 }
+
+}
+
+</script>
 
 /* ONLOAD */
 
