@@ -1,5 +1,7 @@
-<!DOCTYPE html>
+# FINAL FULL REPLACEMENT INDEX.HTML
 
+```html
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -11,22 +13,22 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-select{
-background:#1e293b !important;
-color:white !important;
-}
-
-select option{
-background:#0f172a !important;
-color:white !important;
-padding:10px;
-}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
 font-family:'Poppins',sans-serif;
 background:#020617;
 color:white;
 overflow-x:hidden;
+}
+
+select{
+background:#1e293b !important;
+color:white !important;
+}
+
+select option{
+background:#0f172a;
+color:white;
 }
 
 #loginScreen{
@@ -188,10 +190,6 @@ background:rgba(255,255,255,0.08);
 color:white;
 margin-top:10px;
 }
-select option{
-background:#0f172a;
-color:white;
-}
 
 .btn{
 width:100%;
@@ -203,11 +201,6 @@ background:linear-gradient(135deg,#2563eb,#7c3aed);
 color:white;
 font-weight:700;
 cursor:pointer;
-}
-
-.status{
-margin-top:15px;
-font-weight:700;
 }
 
 .table-container{
@@ -252,7 +245,6 @@ margin-left:0;
 }
 }
 </style>
-
 </head>
 <body>
 
@@ -264,7 +256,8 @@ margin-left:0;
 <input type="email" id="loginUsername" placeholder="Admin Gmail">
 <input type="password" id="loginPassword" placeholder="Password">
 
-<button class="login-btn" onclick="loginSystem()">🔐 LOGIN</button> <button class="forgot-btn" onclick="resetPassword()">🔑 Forgot Password</button>
+<button class="login-btn" onclick="loginSystem()">🔐 LOGIN</button>
+<button class="forgot-btn" onclick="resetPassword()">🔑 Forgot Password</button>
 
 <div id="error">❌ Invalid Email or Password</div>
 </div>
@@ -276,12 +269,12 @@ margin-left:0;
 </div>
 
 <div class="menu">
-<button onclick="showSection('dashboard')"><i class="fa fa-chart-line"></i> Dashboard</button>
-<button onclick="showSection('homework')"><i class="fa fa-book"></i> Homework</button>
-<button onclick="showSection('students')"><i class="fa fa-users"></i> Students</button>
-<button onclick="showSection('history')"><i class="fa fa-clock"></i> History</button>
-<button onclick="showSection('fees')"><i class="fa fa-money-bill"></i> Fees</button>
-<button onclick="logoutSystem()"><i class="fa fa-right-from-bracket"></i> Logout</button>
+<button onclick="showSection('dashboard')">Dashboard</button>
+<button onclick="showSection('homework')">Homework</button>
+<button onclick="showSection('students')">Students</button>
+<button onclick="showSection('history')">History</button>
+<button onclick="showSection('fees')">Fees</button>
+<button onclick="logoutSystem()">Logout</button>
 </div>
 </div>
 
@@ -293,43 +286,23 @@ margin-left:0;
 </div>
 
 <div id="dashboard" class="section">
-
 <div class="cards">
-<div class="card">
-<h3>Total Students</h3>
-<h2 id="totalStudents">0</h2>
-</div>
-
-<div class="card">
-<h3>Total Classes</h3>
-<h2 id="totalClasses">0</h2>
-</div>
-
-<div class="card">
-<h3>WhatsApp</h3>
-<h2 id="waStatus">CHECKING...</h2>
-</div>
-
-<div class="card">
-<h3>System</h3>
-<h2>ONLINE</h2>
-</div>
+<div class="card"><h3>Total Students</h3><h2 id="totalStudents">0</h2></div>
+<div class="card"><h3>Total Classes</h3><h2 id="totalClasses">0</h2></div>
+<div class="card"><h3>WhatsApp</h3><h2 id="waStatus">CHECKING...</h2></div>
+<div class="card"><h3>System</h3><h2>ONLINE</h2></div>
 </div>
 
 <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;">
-
 <div class="panel">
 <h2>📈 Students Analytics</h2>
-<div class="chart-box">
-<canvas id="myChart"></canvas>
-</div>
+<div class="chart-box"><canvas id="myChart"></canvas></div>
 </div>
 
 <div class="panel">
 <h2>🔥 Recent Activity</h2>
 <div id="activityList"></div>
 </div>
-
 </div>
 </div>
 
@@ -339,7 +312,7 @@ margin-left:0;
 <input type="text" id="subject" placeholder="Subject">
 <textarea id="homeworkText" placeholder="Write Homework"></textarea>
 <button class="btn" onclick="sendHomework()">SEND HOMEWORK</button>
-<div id="status" class="status"></div>
+<div id="status"></div>
 </div>
 
 <div id="students" class="section panel" style="display:none;">
@@ -348,12 +321,7 @@ margin-left:0;
 <div class="table-container">
 <table>
 <thead>
-<tr>
-<th>Name</th>
-<th>Class</th>
-<th>Father</th>
-<th>Phone</th>
-</tr>
+<tr><th>Name</th><th>Class</th><th>Father</th><th>Phone</th></tr>
 </thead>
 <tbody id="studentTable"></tbody>
 </table>
@@ -365,12 +333,7 @@ margin-left:0;
 <div class="table-container">
 <table>
 <thead>
-<tr>
-<th>Date</th>
-<th>Class</th>
-<th>Subject</th>
-<th>Homework</th>
-</tr>
+<tr><th>Date</th><th>Class</th><th>Subject</th><th>Homework</th></tr>
 </thead>
 <tbody id="historyTable"></tbody>
 </table>
@@ -382,100 +345,75 @@ margin-left:0;
 <select id="feeClass"></select>
 <textarea id="feeMessage">Dear Parents, Please submit school fee on time.</textarea>
 <button class="btn" onclick="sendFeeReminder()">SEND FEE REMINDER</button>
-<div id="feeStatus" class="status"></div>
+<div id="feeStatus"></div>
 </div>
 
 </div>
 
 <script>
-const API_URL = "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQedCG_AZqQGC3MrWOFEGPsnbBOnwaQtcMtluTD5zHm5Rg1kTtO2y5QjwdGdNAP_hzqlL-lxi-IrVv6Xsxwu6r9jlamiNmNgZB9aWv_t6eTlkheUv8DeU_6JFJGjB9g3gV9khPmYwrECNCaMtfGlb89yR9dwWDp-Sd4vuBsk1sJmIPXD8lYc_o013cc9tS2MJQSLIMf25RisAUkwslqynQAMgS4rI0zSvYjb-UnrL728sehNRudeeobqkTKc2aGIAudAMhVLwbRNYVk2Aw&lib=McJPM91cHnjLpnVey1OX2be0fLL19UkVS";
+const API_URL='https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQedCG_AZqQGC3MrWOFEGPsnbBOnwaQtcMtluTD5zHm5Rg1kTtO2y5QjwdGdNAP_hzqlL-lxi-IrVv6Xsxwu6r9jlamiNmNgZB9aWv_t6eTlkheUv8DeU_6JFJGjB9g3gV9khPmYwrECNCaMtfGlb89yR9dwWDp-Sd4vuBsk1sJmIPXD8lYc_o013cc9tS2MJQSLIMf25RisAUkwslqynQAMgS4rI0zSvYjb-UnrL728sehNRudeeobqkTKc2aGIAudAMhVLwbRNYVk2Aw&lib=McJPM91cHnjLpnVey1OX2be0fLL19UkVS';
 
-let analyticsData = {};
-let homeworkHistory = [];
-let recentActivities = [];
+let analyticsData={};
+let homeworkHistory=[];
+let recentActivities=[];
 let myChart;
 
 function showSection(id){
-document.querySelectorAll('.section').forEach(sec=>{
-sec.style.display='none';
-});
+document.querySelectorAll('.section').forEach(sec=>sec.style.display='none');
 document.getElementById(id).style.display='block';
 }
 
 function addActivity(message){
 recentActivities.unshift({
 time:new Date().toLocaleTimeString(),
-message:message
+message
 });
-
-if(recentActivities.length > 6){
-recentActivities.pop();
-}
-
+if(recentActivities.length>6) recentActivities.pop();
 renderActivities();
 }
 
 function renderActivities(){
-let container = document.getElementById('activityList');
-container.innerHTML = '';
-
+let container=document.getElementById('activityList');
+container.innerHTML='';
 recentActivities.forEach(item=>{
-container.innerHTML += `
-<div class="activity-item">
-<div style="font-size:12px;color:#94a3b8;margin-bottom:6px;">${item.time}</div>
-${item.message}
-</div>
-`;
+container.innerHTML+=`<div class="activity-item"><div style="font-size:12px;color:#94a3b8;margin-bottom:6px;">${item.time}</div>${item.message}</div>`;
 });
 }
 
 async function loadStudents(){
 try{
-let response = await fetch(API_URL);
-let data = await response.json();
+const response=await fetch(API_URL);
+const data=await response.json();
 
-let tbody = document.getElementById('studentTable');
-let classSelect = document.getElementById('class');
-let feeClass = document.getElementById('feeClass');
+const tbody=document.getElementById('studentTable');
+const classSelect=document.getElementById('class');
+const feeClass=document.getElementById('feeClass');
 
 tbody.innerHTML='';
 classSelect.innerHTML='<option value="">Select Class</option>';
 feeClass.innerHTML='<option value="">Select Class</option>';
 
-analyticsData = {};
-
-let total = 0;
+analyticsData={};
+let total=0;
 
 Object.keys(data).forEach(className=>{
 if(!Array.isArray(data[className])) return;
 
-analyticsData[className] = data[className].length;
+analyticsData[className]=data[className].length;
+total+=data[className].length;
 
-total += data[className].length;
-
-classSelect.innerHTML += `<option>${className}</option>`;
-feeClass.innerHTML += `<option>${className}</option>`;
-
+classSelect.innerHTML+=`<option>${className}</option>`;
+feeClass.innerHTML+=`<option>${className}</option>`;
 
 data[className].forEach(student=>{
-
-tbody.innerHTML += `
-<tr>
-<td>${student.student || ''}</td>
-<td>${className}</td>
-<td>${student.father || ''}</td>
-<td>${student.phone || ''}</td>
-</tr>
-`;
-
+tbody.innerHTML+=`<tr><td>${student.student||''}</td><td>${className}</td><td>${student.father||''}</td><td>${student.phone||''}</td></tr>`;
 });
 });
 
-document.getElementById('totalStudents').innerHTML = total;
-document.getElementById('totalClasses').innerHTML = Object.keys(analyticsData).length;
+document.getElementById('totalStudents').innerHTML=total;
+document.getElementById('totalClasses').innerHTML=Object.keys(analyticsData).length;
 
 loadChart();
-
 addActivity(`👨‍🎓 ${total} students loaded successfully`);
 
 }catch(error){
@@ -484,72 +422,53 @@ console.log(error);
 }
 
 function searchStudent(){
-let input = document.getElementById('searchStudent').value.toLowerCase();
-let rows = document.querySelectorAll('#studentTable tr');
-
+let input=document.getElementById('searchStudent').value.toLowerCase();
+let rows=document.querySelectorAll('#studentTable tr');
 rows.forEach(row=>{
-row.style.display = row.innerText.toLowerCase().includes(input) ? '' : 'none';
+row.style.display=row.innerText.toLowerCase().includes(input)?'':'none';
 });
 }
 
-function sendHomework(){
-let cls = document.getElementById('class').value;
-let subject = document.getElementById('subject').value;
-let homework = document.getElementById('homeworkText').value;
+async function sendHomework(){
+let cls=document.getElementById('class').value;
+let subject=document.getElementById('subject').value;
+let homework=document.getElementById('homeworkText').value;
 
-if(!cls || !subject || !homework){
+if(!cls||!subject||!homework){
+alert('Fill all fields');
 return;
 }
 
-homeworkHistory.unshift({
-date:new Date().toLocaleString(),
+try{
+let response=await fetch('http://localhost:3000/send-homework',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
 className:cls,
-subject:subject,
-homework:homework
+subject,
+homework
+})
 });
 
-loadHistory();
+let result=await response.json();
 
+if(result.success){
+document.getElementById('status').innerHTML='✅ Homework Sent Successfully';
 addActivity(`📚 Homework sent to ${cls}`);
-
-document.getElementById('status').innerHTML = '✅ Homework Sent';
+}else{
+document.getElementById('status').innerHTML='❌ Failed To Send';
 }
 
-function loadHistory(){
-let table = document.getElementById('historyTable');
-
-table.innerHTML='';
-
-homeworkHistory.forEach(item=>{
-
-table.innerHTML += `
-<tr>
-<td>${item.date}</td>
-<td>${item.className}</td>
-<td>${item.subject}</td>
-<td>${item.homework}</td>
-</tr>
-`;
-
-});
+}catch(error){
+document.getElementById('status').innerHTML='❌ Server Offline';
 }
-
-function sendFeeReminder(){
-let cls = document.getElementById('feeClass').value;
-
-addActivity(`💰 Fee reminder sent to ${cls}`);
-
-document.getElementById('feeStatus').innerHTML = '✅ Fee Reminder Sent';
 }
 
 function loadChart(){
-const ctx = document.getElementById('myChart');
+const ctx=document.getElementById('myChart');
+if(myChart) myChart.destroy();
 
-if(myChart){
-myChart.destroy();
-}
-
-myChart = new Chart(ctx,{
+myChart=new Chart(ctx,{
 type:'bar',
 data:{
 labels:Object.keys(analyticsData),
@@ -562,20 +481,10 @@ borderRadius:10
 },
 options:{
 responsive:true,
-plugins:{
-legend:{
-labels:{
-color:'white'
-}
-}
-},
+plugins:{legend:{labels:{color:'white'}}},
 scales:{
-y:{
-ticks:{color:'white'}
-},
-x:{
-ticks:{color:'white'}
-}
+y:{ticks:{color:'white'}},
+x:{ticks:{color:'white'}}
 }
 }
 });
@@ -583,81 +492,34 @@ ticks:{color:'white'}
 
 async function checkWhatsappStatus(){
 try{
-let response = await fetch('https://surgical-saturday-grew.ngrok-free.dev -> http://localhost:3000 /status');
-let data = await response.json();
-document.getElementById('waStatus').innerHTML = data.connected ? 'ACTIVE' : 'INACTIVE';
+let response=await fetch('http://localhost:3000/status');
+let data=await response.json();
+document.getElementById('waStatus').innerHTML=data.connected?'ACTIVE':'INACTIVE';
 }catch(error){
-document.getElementById('waStatus').innerHTML = 'OFFLINE';
+document.getElementById('waStatus').innerHTML='OFFLINE';
 }
 }
 
-window.onload = function(){
+window.onload=function(){
 loadStudents();
 checkWhatsappStatus();
-document.getElementById('liveDate').innerHTML = new Date().toDateString();
+document.getElementById('liveDate').innerHTML=new Date().toDateString();
 }
-</script>
-
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-
-import {
-getAuth,
-signInWithEmailAndPassword,
-sendPasswordResetEmail,
-signOut,
-onAuthStateChanged
-} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-
-const firebaseConfig = {
-apiKey: 'AIzaSyDYfBrK6lbL9RYllOkJ00rSsR3sMXHD3tc',
-authDomain: 'school-erp-6c341.firebaseapp.com',
-projectId: 'school-erp-6c341',
-storageBucket: 'school-erp-6c341.firebasestorage.app',
-messagingSenderId: '979771843066',
-appId: '1:979771843066:web:086fd6d2f28339141e4443'
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.loginSystem = async function(){
-let email = document.getElementById('loginUsername').value.trim();
-let password = document.getElementById('loginPassword').value.trim();
-
-try{
-await signInWithEmailAndPassword(auth,email,password);
-document.getElementById('loginScreen').style.display='none';
-}catch(error){
-document.getElementById('error').style.display='block';
-}
-}
-
-window.logoutSystem = async function(){
-await signOut(auth);
-location.reload();
-}
-
-window.resetPassword = async function(){
-let email = prompt('Enter Admin Gmail');
-if(!email) return;
-
-try{
-await sendPasswordResetEmail(auth,email);
-alert('Password reset email sent');
-}catch(error){
-alert(error.message);
-}
-}
-
-onAuthStateChanged(auth,(user)=>{
-if(user){
-document.getElementById('loginScreen').style.display='none';
-}else{
-document.getElementById('loginScreen').style.display='flex';
-}
-});
 </script>
 
 </body>
 </html>
+```
+
+# IMPORTANT
+
+1. Pura old index.html delete karo
+2. Upar wala poora code paste karo
+3. Save karo
+4. index.js run karo:
+
+```bash
+node index.js
+```
+
+5. Browser me CTRL + F5 karo
