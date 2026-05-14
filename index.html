@@ -978,6 +978,85 @@ function searchStudent(){
   });
 
 }
+async function sendFeeReminder(){
+
+  let cls =
+  document.getElementById("feeClass").value;
+
+  let message =
+  document.getElementById("feeMessage").value;
+
+  let status =
+  document.getElementById("feeStatus");
+
+  if(!cls || !message){
+
+    status.style.display = "block";
+
+    status.className =
+    "status error";
+
+    status.innerHTML =
+    "❌ Please fill all fields";
+
+    return;
+
+  }
+
+  status.style.display = "block";
+
+  status.className =
+  "status";
+
+  status.innerHTML =
+  "⏳ Sending Fee Reminder...";
+
+  try{
+
+    await fetch(
+
+    "http://localhost:3000/send-fee-reminder",
+
+    {
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json"
+      },
+
+      body:JSON.stringify({
+
+        className:cls,
+        message:message
+
+      })
+
+    });
+
+    status.className =
+    "status success";
+
+    status.innerHTML =
+    "✅ Fee Reminder Sent Successfully!";
+
+    document.getElementById("feeClass").value = "";
+
+    document.getElementById("feeMessage").value = "";
+
+  }
+
+  catch(error){
+
+    status.className =
+    "status error";
+
+    status.innerHTML =
+    "❌ Server Error";
+
+  }
+
+}  
 loadStudents();
 
 </script>
