@@ -584,6 +584,55 @@ style="display:none;">
     </button>
 
   </div>
+  <!-- FEES -->
+
+<div id="fees" class="section panel" style="display:none;">
+
+  <h2>💰 Send Fee Reminder</h2>
+
+  <div class="label">Class</div>
+
+  <select id="feeClass">
+
+    <option value="">Select Class</option>
+
+    <option>Nursery</option>
+    <option>KG1</option>
+    <option>KG2</option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+    <option>6</option>
+    <option>7</option>
+    <option>8</option>
+    <option>9</option>
+    <option>10</option>
+
+  </select>
+
+  <div class="label">Fee Message</div>
+
+  <textarea
+  id="feeMessage"
+  placeholder="Write Fee Reminder..."
+  ></textarea>
+
+  <button
+  class="btn"
+  onclick="sendFeeReminder()">
+
+    💸 Send Fee Reminder
+
+  </button>
+
+  <div
+  id="feeStatus"
+  class="status">
+  </div>
+
+</div>
 
   <!-- FOOTER -->
 
