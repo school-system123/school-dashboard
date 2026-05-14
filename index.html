@@ -800,8 +800,6 @@ return;
 
 }
 
-showLoader();
-
 document.getElementById('status')
 .innerHTML='⏳ Sending Homework...';
 
@@ -859,6 +857,78 @@ document.getElementById('status')
 
 document.getElementById('status')
 .innerHTML='❌ Server Offline';
+
+}
+
+}
+
+/* ===================================== */
+/* FEE REMINDER */
+/* ===================================== */
+
+async function sendFeeReminder(){
+
+let cls =
+document.getElementById('feeClass').value;
+
+let message =
+document.getElementById('feeMessage').value;
+
+if(!cls || !message){
+
+alert('Fill all fields');
+
+return;
+
+}
+
+document.getElementById('feeStatus')
+.innerHTML='⏳ Sending Fee Reminder...';
+
+try{
+
+let response =
+await fetch('http://localhost:3000/send-fee-reminder',{
+
+method:'POST',
+
+headers:{
+'Content-Type':'application/json'
+},
+
+body:JSON.stringify({
+className:cls,
+message
+})
+
+});
+
+let result =
+await response.json();
+
+if(result.success){
+
+document.getElementById('feeStatus')
+.innerHTML =
+`✅ Fee Reminder Sent To ${result.totalSent} Students`;
+
+addActivity(
+`💰 Fee reminder sent to ${cls}`
+);
+
+}else{
+
+document.getElementById('feeStatus')
+.innerHTML='❌ Failed To Send';
+
+}
+
+}catch(error){
+
+document.getElementById('feeStatus')
+.innerHTML='❌ Server Offline';
+
+}
 
 }
 
