@@ -6,10 +6,7 @@
 <title>THE EDUCATION FOUNTAIN MODEL SCHOOL</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
@@ -37,48 +34,6 @@ background:#0f172a;
 color:white;
 }
 
-/* LOADER */
-
-#loader{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(2,6,23,0.85);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:999999;
-backdrop-filter:blur(5px);
-}
-
-.loader-box{
-text-align:center;
-}
-
-.spinner{
-width:70px;
-height:70px;
-border:7px solid rgba(255,255,255,0.1);
-border-top:7px solid #2563eb;
-border-radius:50%;
-animation:spin 1s linear infinite;
-margin:auto;
-}
-
-@keyframes spin{
-100%{
-transform:rotate(360deg);
-}
-}
-
-.loader-box p{
-margin-top:20px;
-font-size:18px;
-font-weight:700;
-}
-
 /* LOGIN */
 
 #loginScreen{
@@ -91,8 +46,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
-z-index:999999;
-pointer-events:auto;
+z-index:99999;
 }
 
 .login-box{
@@ -323,15 +277,6 @@ margin-left:0;
 
 <body>
 
-<!-- LOADER -->
-
-<div id="loader">
-<div class="loader-box">
-<div class="spinner"></div>
-<p>Please Wait...</p>
-</div>
-</div>
-
 <!-- LOGIN -->
 
 <div id="loginScreen">
@@ -342,32 +287,20 @@ margin-left:0;
 
 <p>THE EDUCATION FOUNTAIN MODEL SCHOOL</p>
 
-<input type="email"
-id="loginUsername"
-placeholder="Admin Gmail">
+<input type="email" id="loginUsername" placeholder="Admin Gmail">
 
-<input type="password"
-id="loginPassword"
-placeholder="Password">
+<input type="password" id="loginPassword" placeholder="Password">
 
-<button class="login-btn"
-onclick="loginSystem()">
-
+<button class="login-btn" onclick="loginSystem()">
 🔐 LOGIN
-
 </button>
 
-<button class="forgot-btn"
-onclick="resetPassword()">
-
+<button class="forgot-btn" onclick="resetPassword()">
 🔑 Forgot Password
-
 </button>
 
 <div id="error">
-
 ❌ Invalid Email or Password
-
 </div>
 
 </div>
@@ -379,38 +312,22 @@ onclick="resetPassword()">
 <div class="sidebar">
 
 <div class="logo">
-
-<h1>
-THE EDUCATION FOUNTAIN MODEL SCHOOL
-</h1>
-
+<h1>THE EDUCATION FOUNTAIN MODEL SCHOOL</h1>
 </div>
 
 <div class="menu">
 
-<button onclick="showSection('dashboard')">
-📊 Dashboard
-</button>
+<button onclick="showSection('dashboard')">📊 Dashboard</button>
 
-<button onclick="showSection('homework')">
-📚 Homework
-</button>
+<button onclick="showSection('homework')">📚 Homework</button>
 
-<button onclick="showSection('students')">
-👨‍🎓 Students
-</button>
+<button onclick="showSection('students')">👨‍🎓 Students</button>
 
-<button onclick="showSection('history')">
-🕘 History
-</button>
+<button onclick="showSection('history')">🕘 History</button>
 
-<button onclick="showSection('fees')">
-💰 Fees
-</button>
+<button onclick="showSection('fees')">💰 Fees</button>
 
-<button onclick="logoutSystem()">
-🚪 Logout
-</button>
+<button onclick="logoutSystem()">🚪 Logout</button>
 
 </div>
 
@@ -421,11 +338,8 @@ THE EDUCATION FOUNTAIN MODEL SCHOOL
 <div class="main">
 
 <div class="topbar">
-
 <h1>School Management Dashboard</h1>
-
 <p id="liveDate"></p>
-
 </div>
 
 <!-- DASHBOARD -->
@@ -482,26 +396,18 @@ THE EDUCATION FOUNTAIN MODEL SCHOOL
 
 <!-- HOMEWORK -->
 
-<div id="homework"
-class="section panel"
-style="display:none;">
+<div id="homework" class="section panel" style="display:none;">
 
 <h2>📚 Send Homework</h2>
 
 <select id="class"></select>
 
-<input type="text"
-id="subject"
-placeholder="Subject">
+<input type="text" id="subject" placeholder="Subject">
 
-<textarea id="homeworkText"
-placeholder="Write Homework"></textarea>
+<textarea id="homeworkText" placeholder="Write Homework"></textarea>
 
-<button class="btn"
-onclick="sendHomework()">
-
+<button class="btn" onclick="sendHomework()">
 SEND HOMEWORK
-
 </button>
 
 <div id="status" class="status"></div>
@@ -510,16 +416,11 @@ SEND HOMEWORK
 
 <!-- STUDENTS -->
 
-<div id="students"
-class="section panel"
-style="display:none;">
+<div id="students" class="section panel" style="display:none;">
 
 <h2>👨‍🎓 Student Records</h2>
 
-<input type="text"
-id="searchStudent"
-placeholder="Search Student"
-onkeyup="searchStudent()">
+<input type="text" id="searchStudent" placeholder="Search Student" onkeyup="searchStudent()">
 
 <div class="table-container">
 
@@ -544,9 +445,7 @@ onkeyup="searchStudent()">
 
 <!-- HISTORY -->
 
-<div id="history"
-class="section panel"
-style="display:none;">
+<div id="history" class="section panel" style="display:none;">
 
 <h2>🕘 Homework History</h2>
 
@@ -573,9 +472,7 @@ style="display:none;">
 
 <!-- FEES -->
 
-<div id="fees"
-class="section panel"
-style="display:none;">
+<div id="fees" class="section panel" style="display:none;">
 
 <h2>💰 Fee Reminder</h2>
 
@@ -583,11 +480,8 @@ style="display:none;">
 
 <textarea id="feeMessage">Dear Parents, Please submit school fee on time.</textarea>
 
-<button class="btn"
-onclick="sendFeeReminder()">
-
+<button class="btn" onclick="sendFeeReminder()">
 SEND FEE REMINDER
-
 </button>
 
 <div id="feeStatus" class="status"></div>
@@ -652,9 +546,7 @@ alert('Contact Admin');
 function showSection(id){
 
 document.querySelectorAll('.section').forEach(sec=>{
-
 sec.style.display='none';
-
 });
 
 document.getElementById(id).style.display='block';
@@ -671,9 +563,7 @@ message
 });
 
 if(recentActivities.length > 8){
-
 recentActivities.pop();
-
 }
 
 renderActivities();
@@ -690,23 +580,12 @@ container.innerHTML='';
 recentActivities.forEach(item=>{
 
 container.innerHTML += `
-
 <div class="activity-item">
-
-<div style="
-font-size:12px;
-color:#94a3b8;
-margin-bottom:6px;
-">
-
+<div style="font-size:12px;color:#94a3b8;margin-bottom:6px;">
 ${item.time}
-
 </div>
-
 ${item.message}
-
 </div>
-
 `;
 
 });
@@ -719,11 +598,9 @@ async function loadStudents(){
 
 try{
 
-const response =
-await fetch(API_URL);
+const response = await fetch(API_URL);
 
-const data =
-await response.json();
+const data = await response.json();
 
 const tbody =
 document.getElementById('studentTable');
@@ -764,14 +641,12 @@ feeClass.innerHTML +=
 data[className].forEach(student=>{
 
 tbody.innerHTML += `
-
 <tr>
 <td>${student.student || ''}</td>
 <td>${className}</td>
 <td>${student.father || ''}</td>
 <td>${student.phone || ''}</td>
 </tr>
-
 `;
 
 });
@@ -786,9 +661,7 @@ document.getElementById('totalClasses')
 
 loadChart();
 
-addActivity(
-`👨‍🎓 ${total} students loaded successfully`
-);
+addActivity(`👨‍🎓 ${total} students loaded successfully`);
 
 }catch(error){
 
@@ -836,7 +709,6 @@ document.getElementById('homeworkText').value;
 if(!cls || !subject || !homework){
 
 alert('Fill all fields');
-
 return;
 
 }
@@ -872,9 +744,7 @@ document.getElementById('status')
 .innerHTML =
 `✅ Sent To ${result.totalSent} Students`;
 
-addActivity(
-`📚 Homework sent to ${cls}`
-);
+addActivity(`📚 Homework sent to ${cls}`);
 
 homeworkHistory.unshift({
 
@@ -915,14 +785,12 @@ table.innerHTML='';
 homeworkHistory.forEach(item=>{
 
 table.innerHTML += `
-
 <tr>
 <td>${item.date}</td>
 <td>${item.className}</td>
 <td>${item.subject}</td>
 <td>${item.homework}</td>
 </tr>
-
 `;
 
 });
@@ -942,7 +810,6 @@ document.getElementById('feeMessage').value;
 if(!cls || !message){
 
 alert('Fill all fields');
-
 return;
 
 }
@@ -977,9 +844,7 @@ document.getElementById('feeStatus')
 .innerHTML =
 `✅ Sent To ${result.totalSent} Students`;
 
-addActivity(
-`💰 Fee reminder sent to ${cls}`
-);
+addActivity(`💰 Fee reminder sent to ${cls}`);
 
 }else{
 
@@ -1005,9 +870,7 @@ const ctx =
 document.getElementById('myChart');
 
 if(myChart){
-
 myChart.destroy();
-
 }
 
 myChart = new Chart(ctx,{
@@ -1099,80 +962,6 @@ document.getElementById('loginScreen')
 .style.display='none';
 
 }
-
-}
-
-</script>
-
-function loginSystem(){
-
-let email =
-document.getElementById('loginUsername').value.trim();
-
-let password =
-document.getElementById('loginPassword').value.trim();
-
-if(
-email === 'admin@gmail.com' &&
-password === '123456'
-){
-
-document.getElementById('loginScreen').style.display='none';
-
-localStorage.setItem('schoolLogin','true');
-
-}else{
-
-document.getElementById('error').style.display='block';
-
-}
-
-}
-
-function logoutSystem(){
-
-localStorage.removeItem('schoolLogin');
-
-location.reload();
-
-}
-
-function resetPassword(){
-
-alert('Contact Admin');
-
-}
-
-window.onload=function(){
-
-loadStudents();
-
-checkWhatsappStatus();
-
-document.getElementById('liveDate').innerHTML =
-new Date().toDateString();
-
-if(localStorage.getItem('schoolLogin')==='true'){
-
-document.getElementById('loginScreen').style.display='none';
-
-}
-
-}
-
-</script>
-
-/* ONLOAD */
-
-window.onload=function(){
-
-loadStudents();
-
-checkWhatsappStatus();
-
-document.getElementById('liveDate')
-.innerHTML =
-new Date().toDateString();
 
 }
 
