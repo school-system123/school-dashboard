@@ -505,6 +505,31 @@ loadStudents();
 checkWhatsappStatus();
 document.getElementById('liveDate').innerHTML=new Date().toDateString();
 }
+
+function loginSystem(){
+let email=document.getElementById('loginUsername').value;
+let password=document.getElementById('loginPassword').value;
+
+if(email==='admin@gmail.com' && password==='123456'){
+document.getElementById('loginScreen').style.display='none';
+localStorage.setItem('schoolLogin','true');
+}else{
+document.getElementById('error').style.display='block';
+}
+}
+
+function logoutSystem(){
+localStorage.removeItem('schoolLogin');
+location.reload();
+}
+
+function resetPassword(){
+alert('Password reset system temporarily disabled');
+}
+
+if(localStorage.getItem('schoolLogin')==='true'){
+document.getElementById('loginScreen').style.display='none';
+}
 </script>
 
 </body>
