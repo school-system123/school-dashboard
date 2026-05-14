@@ -436,9 +436,11 @@ text-align:center;
 
 <p>THE EDUCATION FOUNTAIN MODEL SCHOOL</p>
 
-<input type="text"
+<input
+type="email"
 id="loginUsername"
-placeholder="Username">
+placeholder="Admin Gmail"
+/>
 
 <input type="password"
 id="loginPassword"
@@ -449,6 +451,21 @@ onclick="loginSystem()">
 
 🔐 LOGIN NOW
 
+</button>
+<button
+onclick="resetPassword()"
+style="
+width:100%;
+padding:13px;
+margin-top:12px;
+border:none;
+border-radius:14px;
+background:#0f172a;
+color:white;
+cursor:pointer;
+font-weight:bold;
+">
+🔑 Forgot Password
 </button>
 
 <div id="error">
@@ -568,7 +585,7 @@ Analytics & WhatsApp Notifications
 <div class="card">
 <i class="fa fa-whatsapp"></i>
 <h3>WhatsApp</h3>
-<h2>ACTIVE</h2>
+<h2 id="waStatus">CHECKING...</h2>
 </div>
 
 <div class="card">
@@ -977,11 +994,6 @@ onclick="sendFeeReminder()">
 
 <script>
 
-/* LOGIN */
-
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "12345";
-
 /* GOOGLE SHEET API */
 
 const API_URL =
@@ -1036,6 +1048,40 @@ loginSystem();
 
 });
 
+async function checkWhatsappStatus(){
+
+try{
+
+let response = await fetch(
+"http://localhost:3000/status"
+);
+
+let data = await response.json();
+
+if(data.connected){
+
+document.getElementById(
+"waStatus"
+).innerHTML = "ACTIVE";
+
+}else{
+
+document.getElementById(
+"waStatus"
+).innerHTML = "INACTIVE";
+
+}
+
+}catch(error){
+
+document.getElementById(
+"waStatus"
+).innerHTML = "OFFLINE";
+
+}
+
+}
+  
 /* AUTO LOGIN */
 
 window.onload = function(){
@@ -1580,6 +1626,79 @@ color:'rgba(255,255,255,0.05)'
 }
 
 </script>
+<script type="module">
 
+}catch(error){
+
+let errorBox =
+document.getElementById("error");
+
+errorBox.style.display = "block";
+
+errorBox.innerHTML =
+"❌ Invalid Email or Password";
+
+}
+
+}
+
+window.logoutSystem = async function(){
+
+await signOut(auth);
+
+localStorage.removeItem(
+"schoolLogin"
+);
+
+location.reload();
+
+}
+
+window.resetPassword = async function(){
+
+let email = prompt(
+"Enter Your Admin Gmail"
+);
+
+if(!email) return;
+
+try{
+
+await sendPasswordResetEmail(
+auth,
+email
+);
+
+alert(
+"Password Reset Email Sent Successfully"
+);
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+}
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+document.getElementById(
+"loginScreen"
+).style.display = "none";
+
+}else{
+
+document.getElementById(
+"loginScreen"
+).style.display = "flex";
+
+}
+
+});
+
+</script>
 </body>
 </html>
