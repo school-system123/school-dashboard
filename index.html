@@ -1,11 +1,17 @@
+<!-- ===========================
+PROFESSIONAL REAL ERP INDEX.HTML
+FULLY UPGRADED VERSION
+=========================== -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>THE EDUCATION FOUNTAIN MODEL SCHOOL ERP</title>
+<title>THE EDUCATION FOUNTAIN MODEL SCHOOL</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -24,12 +30,12 @@ box-sizing:border-box;
 
 body{
 font-family:'Poppins',sans-serif;
-background:#0f172a;
+background:#020617;
 color:white;
 overflow-x:hidden;
 }
 
-/* ===== LOGIN ===== */
+/* LOGIN */
 
 #loginScreen{
 position:fixed;
@@ -37,27 +43,26 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:
-linear-gradient(135deg,#020617,#0f172a,#1e293b);
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:999999;
+background:
+linear-gradient(135deg,#020617,#0f172a,#1e293b);
+z-index:99999;
 }
 
 .login-box{
 width:420px;
 padding:40px;
 border-radius:30px;
-background:rgba(255,255,255,0.08);
+background:rgba(255,255,255,0.07);
 backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,0.08);
 box-shadow:0 0 40px rgba(37,99,235,0.3);
-animation:fadeIn 1s ease;
 }
 
 .login-box h1{
-font-size:35px;
+font-size:34px;
 font-weight:800;
 text-align:center;
 margin-bottom:10px;
@@ -65,7 +70,7 @@ margin-bottom:10px;
 
 .login-box p{
 text-align:center;
-color:#cbd5e1;
+color:#94a3b8;
 margin-bottom:30px;
 }
 
@@ -75,26 +80,22 @@ padding:16px;
 margin-top:15px;
 border:none;
 outline:none;
-border-radius:15px;
+border-radius:16px;
 background:rgba(255,255,255,0.08);
 color:white;
 font-size:15px;
 }
 
-.login-box input::placeholder{
-color:#94a3b8;
-}
-
 .login-btn{
 width:100%;
 padding:16px;
-margin-top:22px;
+margin-top:20px;
 border:none;
 border-radius:16px;
 background:linear-gradient(135deg,#2563eb,#7c3aed);
+color:white;
 font-size:16px;
 font-weight:700;
-color:white;
 cursor:pointer;
 transition:0.3s;
 }
@@ -105,14 +106,14 @@ box-shadow:0 10px 25px rgba(37,99,235,0.4);
 }
 
 #error{
+display:none;
 margin-top:15px;
 color:#ef4444;
 text-align:center;
-display:none;
 font-weight:600;
 }
 
-/* ===== SIDEBAR ===== */
+/* SIDEBAR */
 
 .sidebar{
 position:fixed;
@@ -121,7 +122,7 @@ left:0;
 width:290px;
 height:100vh;
 padding:25px;
-background:rgba(15,23,42,0.95);
+background:rgba(15,23,42,0.96);
 backdrop-filter:blur(20px);
 border-right:1px solid rgba(255,255,255,0.08);
 overflow:auto;
@@ -134,8 +135,8 @@ margin-bottom:35px;
 
 .logo h1{
 font-size:24px;
-line-height:35px;
 font-weight:800;
+line-height:35px;
 }
 
 .logo p{
@@ -144,33 +145,34 @@ font-size:13px;
 color:#94a3b8;
 }
 
-.principal{
-background:linear-gradient(135deg,#1e293b,#0f172a);
+.principal-box{
 padding:20px;
 border-radius:25px;
-margin-bottom:30px;
+background:linear-gradient(135deg,#1e293b,#0f172a);
 text-align:center;
+margin-bottom:30px;
 border:1px solid rgba(255,255,255,0.08);
 }
 
-.principal img{
+.principal-box img{
 width:85px;
 height:85px;
 border-radius:50%;
-margin-bottom:12px;
-border:3px solid #2563eb;
 object-fit:cover;
+border:3px solid #2563eb;
+margin-bottom:12px;
 }
 
-.principal h2{
+.principal-box h2{
 font-size:20px;
-margin-top:5px;
 }
 
-.principal p{
-color:#94a3b8;
+.principal-box p{
 font-size:13px;
+color:#94a3b8;
 }
+
+/* MENU */
 
 .menu button{
 width:100%;
@@ -183,8 +185,8 @@ color:white;
 font-size:15px;
 font-weight:600;
 cursor:pointer;
-transition:0.3s;
 text-align:left;
+transition:0.3s;
 }
 
 .menu button i{
@@ -192,20 +194,18 @@ margin-right:12px;
 }
 
 .menu button:hover{
-transform:translateX(6px);
 background:linear-gradient(135deg,#2563eb,#7c3aed);
-box-shadow:0 10px 20px rgba(37,99,235,0.25);
+transform:translateX(5px);
 }
 
-/* ===== MAIN ===== */
+/* MAIN */
 
 .main{
 margin-left:290px;
 padding:30px;
-min-height:100vh;
 }
 
-/* ===== TOPBAR ===== */
+/* TOPBAR */
 
 .topbar{
 display:flex;
@@ -213,8 +213,8 @@ justify-content:space-between;
 align-items:center;
 padding:25px 30px;
 border-radius:30px;
-background:rgba(255,255,255,0.06);
-backdrop-filter:blur(15px);
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
 border:1px solid rgba(255,255,255,0.08);
 margin-bottom:30px;
 }
@@ -225,41 +225,41 @@ font-weight:800;
 }
 
 .topbar p{
-color:#cbd5e1;
 margin-top:6px;
+color:#94a3b8;
 }
 
-.live-time{
+/* CLOCK */
+
+.clock{
 text-align:right;
 }
 
-.live-time h2{
-font-size:18px;
+.clock h2{
+font-size:20px;
 }
 
-.live-time p{
+.clock p{
 font-size:14px;
 color:#94a3b8;
 }
 
-/* ===== CARDS ===== */
+/* CARDS */
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:22px;
 margin-bottom:30px;
 }
 
 .card{
-padding:30px;
+padding:28px;
 border-radius:28px;
-background:rgba(255,255,255,0.06);
-backdrop-filter:blur(15px);
+background:rgba(255,255,255,0.05);
 border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
 transition:0.3s;
-position:relative;
-overflow:hidden;
 }
 
 .card:hover{
@@ -268,15 +268,15 @@ box-shadow:0 20px 40px rgba(0,0,0,0.3);
 }
 
 .card i{
-font-size:30px;
-margin-bottom:18px;
+font-size:32px;
+margin-bottom:15px;
 color:#60a5fa;
 }
 
 .card h3{
 font-size:15px;
 color:#cbd5e1;
-margin-bottom:12px;
+margin-bottom:10px;
 }
 
 .card h2{
@@ -284,26 +284,27 @@ font-size:40px;
 font-weight:800;
 }
 
-/* ===== PANELS ===== */
+/* PANEL */
 
 .panel{
 padding:30px;
 border-radius:30px;
-background:rgba(255,255,255,0.06);
-backdrop-filter:blur(15px);
+background:rgba(255,255,255,0.05);
 border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
 margin-bottom:30px;
 }
 
 .panel h2{
 margin-bottom:25px;
 font-size:28px;
-font-weight:700;
 }
 
+/* FORM */
+
 .label{
+margin-top:18px;
 margin-bottom:8px;
-margin-top:20px;
 font-weight:600;
 }
 
@@ -315,7 +316,7 @@ padding:16px;
 border:none;
 outline:none;
 border-radius:18px;
-background:rgba(255,255,255,0.07);
+background:rgba(255,255,255,0.08);
 color:white;
 font-size:15px;
 }
@@ -328,28 +329,28 @@ resize:vertical;
 .btn{
 width:100%;
 padding:17px;
+margin-top:25px;
 border:none;
 border-radius:18px;
-margin-top:25px;
 background:linear-gradient(135deg,#2563eb,#7c3aed);
+color:white;
 font-size:16px;
 font-weight:700;
-color:white;
 cursor:pointer;
 transition:0.3s;
 }
 
 .btn:hover{
 transform:translateY(-3px);
-box-shadow:0 15px 30px rgba(37,99,235,0.35);
+box-shadow:0 15px 30px rgba(37,99,235,0.3);
 }
 
-/* ===== STATUS ===== */
+/* STATUS */
 
 .status{
+display:none;
 margin-top:15px;
 font-weight:700;
-display:none;
 }
 
 .success{
@@ -360,7 +361,7 @@ color:#4ade80;
 color:#ef4444;
 }
 
-/* ===== TABLE ===== */
+/* TABLE */
 
 .table-container{
 overflow:auto;
@@ -372,29 +373,27 @@ border-collapse:collapse;
 }
 
 table th{
-background:rgba(255,255,255,0.08);
 padding:16px;
+background:rgba(255,255,255,0.06);
 text-align:left;
-font-size:14px;
 }
 
 table td{
 padding:16px;
 border-bottom:1px solid rgba(255,255,255,0.08);
-color:#e2e8f0;
 }
 
 table tr:hover{
-background:rgba(255,255,255,0.05);
+background:rgba(255,255,255,0.04);
 }
 
-/* ===== CHART ===== */
+/* CHART */
 
 .chart-box{
 height:400px;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -415,20 +414,8 @@ gap:20px;
 text-align:center;
 }
 
-}
-
-/* ===== ANIMATION ===== */
-
-@keyframes fadeIn{
-
-from{
-opacity:0;
-transform:translateY(20px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
+.clock{
+text-align:center;
 }
 
 }
@@ -449,12 +436,19 @@ transform:translateY(0);
 
 <p>THE EDUCATION FOUNTAIN MODEL SCHOOL</p>
 
-<input type="text" id="loginUsername" placeholder="Username">
+<input type="text"
+id="loginUsername"
+placeholder="Username">
 
-<input type="password" id="loginPassword" placeholder="Password">
+<input type="password"
+id="loginPassword"
+placeholder="Password">
 
-<button class="login-btn" onclick="loginSystem()">
+<button class="login-btn"
+onclick="loginSystem()">
+
 🔐 LOGIN NOW
+
 </button>
 
 <div id="error">
@@ -476,11 +470,11 @@ THE EDUCATION <br>
 FOUNTAIN MODEL SCHOOL
 </h1>
 
-<p>Professional ERP Management System</p>
+<p>Professional School ERP Dashboard</p>
 
 </div>
 
-<div class="principal">
+<div class="principal-box">
 
 <img src="https://i.imgur.com/6VBx3io.png">
 
@@ -509,7 +503,7 @@ Students
 
 <button onclick="showSection('history')">
 <i class="fa fa-clock"></i>
-History
+Homework History
 </button>
 
 <button onclick="showSection('fees')">
@@ -538,12 +532,12 @@ Logout
 
 <p>
 Manage Students, Homework,
-Fees & WhatsApp Notifications
+Analytics & WhatsApp Notifications
 </p>
 
 </div>
 
-<div class="live-time">
+<div class="clock">
 
 <h2 id="liveClock"></h2>
 
@@ -568,7 +562,7 @@ Fees & WhatsApp Notifications
 <div class="card">
 <i class="fa fa-school"></i>
 <h3>Total Classes</h3>
-<h2>14</h2>
+<h2 id="totalClasses">0</h2>
 </div>
 
 <div class="card">
@@ -587,10 +581,12 @@ Fees & WhatsApp Notifications
 
 <div class="panel">
 
-<h2>📈 School Analytics</h2>
+<h2>📈 Students Analytics</h2>
 
 <div class="chart-box">
+
 <canvas id="myChart"></canvas>
+
 </div>
 
 </div>
@@ -611,27 +607,13 @@ style="display:none;">
 
 <option value="">Select Class</option>
 
-<option>Nursery</option>
-<option>KG1</option>
-<option>KG2</option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-
 </select>
 
 <div class="label">Subject</div>
 
 <input type="text"
 id="subject"
-placeholder="Enter Subject">
+placeholder="English">
 
 <div class="label">Homework</div>
 
@@ -640,7 +622,9 @@ placeholder="Write Homework Here..."></textarea>
 
 <button class="btn"
 onclick="sendHomework()">
+
 🚀 SEND HOMEWORK
+
 </button>
 
 <div id="status" class="status"></div>
@@ -729,20 +713,6 @@ style="display:none;">
 
 <option value="">Select Class</option>
 
-<option>Nursery</option>
-<option>KG1</option>
-<option>KG2</option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-
 </select>
 
 <div class="label">Message</div>
@@ -772,20 +742,31 @@ onclick="sendFeeReminder()">
 
 <script>
 
-/* ===== LOGIN ===== */
+/* LOGIN */
 
 const ADMIN_USERNAME = "admin";
 const ADMIN_PASSWORD = "12345";
 
+/* GOOGLE SHEET API */
+
+const API_URL =
+"https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQedCG_AZqQGC3MrWOFEGPsnbBOnwaQtcMtluTD5zHm5Rg1kTtO2y5QjwdGdNAP_hzqlL-lxi-IrVv6Xsxwu6r9jlamiNmNgZB9aWv_t6eTlkheUv8DeU_6JFJGjB9g3gV9khPmYwrECNCaMtfGlb89yR9dwWDp-Sd4vuBsk1sJmIPXD8lYc_o013cc9tS2MJQSLIMf25RisAUkwslqynQAMgS4rI0zSvYjb-UnrL728sehNRudeeobqkTKc2aGIAudAMhVLwbRNYVk2Aw&lib=McJPM91cHnjLpnVey1OX2be0fLL19UkVS";
+
 let homeworkHistory = [];
+
+let analyticsData = {};
+
+let myChart;
+
+/* LOGIN */
 
 function loginSystem(){
 
 let username =
-document.getElementById("loginUsername").value;
+document.getElementById("loginUsername").value.trim();
 
 let password =
-document.getElementById("loginPassword").value;
+document.getElementById("loginPassword").value.trim();
 
 if(
 username === ADMIN_USERNAME &&
@@ -806,7 +787,7 @@ document.getElementById("error")
 
 }
 
-/* ===== ENTER LOGIN ===== */
+/* ENTER LOGIN */
 
 document.addEventListener("keypress",function(e){
 
@@ -818,7 +799,7 @@ loginSystem();
 
 });
 
-/* ===== AUTO LOGIN ===== */
+/* AUTO LOGIN */
 
 window.onload = function(){
 
@@ -830,40 +811,12 @@ document.getElementById("loginScreen")
 }
 
 loadStudents();
-loadChart();
+
 startClock();
 
 }
 
-/* ===== LOGOUT ===== */
-
-function logoutSystem(){
-
-localStorage.removeItem("schoolLogin");
-
-location.reload();
-
-}
-
-/* ===== SECTION ===== */
-
-function showSection(id){
-
-let sections =
-document.querySelectorAll(".section");
-
-sections.forEach(sec => {
-
-sec.style.display = "none";
-
-});
-
-document.getElementById(id)
-.style.display = "block";
-
-}
-
-/* ===== CLOCK ===== */
+/* CLOCK */
 
 function startClock(){
 
@@ -883,37 +836,131 @@ now.toDateString();
 
 }
 
-/* ===== STUDENTS ===== */
+/* LOGOUT */
+
+function logoutSystem(){
+
+localStorage.removeItem("schoolLogin");
+
+location.reload();
+
+}
+
+/* SECTION */
+
+function showSection(id){
+
+let sections =
+document.querySelectorAll(".section");
+
+sections.forEach(sec=>{
+
+sec.style.display = "none";
+
+});
+
+document.getElementById(id)
+.style.display = "block";
+
+}
+
+/* LOAD STUDENTS REAL */
 
 async function loadStudents(){
+
+try{
+
+let response =
+await fetch(API_URL);
+
+let data =
+await response.json();
 
 let tbody =
 document.getElementById("studentTable");
 
 tbody.innerHTML = "";
 
-for(let i=1;i<=120;i++){
+analyticsData = {};
+
+let totalStudents = 0;
+
+let classSelect =
+document.getElementById("class");
+
+let feeClass =
+document.getElementById("feeClass");
+
+classSelect.innerHTML =
+'<option value="">Select Class</option>';
+
+feeClass.innerHTML =
+'<option value="">Select Class</option>';
+
+Object.keys(data).forEach(className=>{
+
+analyticsData[className] =
+data[className].length;
+
+totalStudents +=
+data[className].length;
+
+/* CLASS OPTIONS */
+
+classSelect.innerHTML +=
+`<option>${className}</option>`;
+
+feeClass.innerHTML +=
+`<option>${className}</option>`;
+
+/* TABLE */
+
+data[className].forEach(student=>{
 
 tbody.innerHTML += `
 
 <tr>
 
-<td>Student ${i}</td>
-<td>${Math.ceil(i/10)}</td>
-<td>Father ${i}</td>
-<td>03001234${i}</td>
+<td>${student.student || ""}</td>
+<td>${className}</td>
+<td>${student.father || ""}</td>
+<td>${student.phone || ""}</td>
 
 </tr>
 
 `;
 
+});
+
+});
+
+/* COUNTERS */
+
+animateCounter(
+"totalStudents",
+totalStudents
+);
+
+animateCounter(
+"totalClasses",
+Object.keys(data).length
+);
+
+/* CHART */
+
+loadChart();
+
+}catch(error){
+
+alert("❌ Student Data Load Error");
+
+console.log(error);
+
 }
 
-animateCounter("totalStudents",120);
-
 }
 
-/* ===== COUNTER ===== */
+/* COUNTER */
 
 function animateCounter(id,target){
 
@@ -922,7 +969,7 @@ document.getElementById(id);
 
 let count = 0;
 
-let speed = target / 100;
+let speed = target / 80;
 
 let interval = setInterval(()=>{
 
@@ -931,6 +978,7 @@ count += speed;
 if(count >= target){
 
 count = target;
+
 clearInterval(interval);
 
 }
@@ -942,7 +990,7 @@ Math.floor(count);
 
 }
 
-/* ===== SEARCH ===== */
+/* SEARCH */
 
 function searchStudent(){
 
@@ -955,9 +1003,11 @@ document.querySelectorAll("#studentTable tr");
 
 rows.forEach(row=>{
 
+let text =
+row.innerText.toLowerCase();
+
 row.style.display =
-row.innerText.toLowerCase()
-.includes(input)
+text.includes(input)
 ? ""
 : "none";
 
@@ -965,7 +1015,7 @@ row.innerText.toLowerCase()
 
 }
 
-/* ===== HOMEWORK ===== */
+/* HOMEWORK */
 
 async function sendHomework(){
 
@@ -984,16 +1034,24 @@ document.getElementById("status");
 if(!cls || !subject || !homework){
 
 status.style.display = "block";
-status.className = "status error";
-status.innerHTML = "❌ Fill all fields";
+
+status.className =
+"status error";
+
+status.innerHTML =
+"❌ Fill all fields";
 
 return;
 
 }
 
 status.style.display = "block";
-status.className = "status success";
-status.innerHTML = "✅ Homework Sent Successfully";
+
+status.className =
+"status success";
+
+status.innerHTML =
+"✅ Homework Sent Successfully";
 
 homeworkHistory.unshift({
 
@@ -1008,7 +1066,7 @@ loadHistory();
 
 }
 
-/* ===== HISTORY ===== */
+/* HISTORY */
 
 function loadHistory(){
 
@@ -1036,7 +1094,7 @@ table.innerHTML += `
 
 }
 
-/* ===== FEES ===== */
+/* FEE */
 
 function sendFeeReminder(){
 
@@ -1052,55 +1110,64 @@ document.getElementById("feeStatus");
 if(!cls || !message){
 
 status.style.display = "block";
-status.className = "status error";
-status.innerHTML = "❌ Fill all fields";
+
+status.className =
+"status error";
+
+status.innerHTML =
+"❌ Fill all fields";
 
 return;
 
 }
 
 status.style.display = "block";
-status.className = "status success";
-status.innerHTML = "✅ Fee Reminder Sent";
+
+status.className =
+"status success";
+
+status.innerHTML =
+"✅ Fee Reminder Sent";
 
 }
 
-/* ===== CHART ===== */
+/* CHART */
 
 function loadChart(){
 
 const ctx =
-document.getElementById('myChart');
+document.getElementById("myChart");
 
-new Chart(ctx, {
+if(myChart){
 
-type: 'bar',
+myChart.destroy();
 
-data: {
+}
 
-labels: [
-'Class 1',
-'Class 2',
-'Class 3',
-'Class 4',
-'Class 5',
-'Class 6'
-],
+myChart = new Chart(ctx, {
 
-datasets: [{
+type:'bar',
 
-label: 'Students',
+data:{
 
-data: [45,59,80,51,56,95],
+labels:
+Object.keys(analyticsData),
 
-borderWidth: 1,
-borderRadius: 12
+datasets:[{
+
+label:'Students',
+
+data:
+Object.values(analyticsData),
+
+borderWidth:1,
+borderRadius:12
 
 }]
 
 },
 
-options: {
+options:{
 
 responsive:true,
 
@@ -1115,6 +1182,7 @@ color:'white'
 scales:{
 
 y:{
+beginAtZero:true,
 ticks:{
 color:'white'
 },
