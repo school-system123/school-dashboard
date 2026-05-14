@@ -1,26 +1,98 @@
-# COMPLETE `index.html` REPLACEMENT
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>THE EDUCATION FOUNTAIN MODEL SCHOOL</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
 }
 
 body{
+font-family:Arial,sans-serif;
 background:#f1f5f9;
 display:flex;
 min-height:100vh;
 }
+
+/* LOGIN */
+
+#loginScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+.login-box{
+width:420px;
+background:white;
+padding:40px;
+border-radius:25px;
+box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
+
+.login-box h1{
+text-align:center;
+font-size:30px;
+margin-bottom:10px;
+color:#0f172a;
+}
+
+.login-box p{
+text-align:center;
+margin-bottom:25px;
+color:#64748b;
+}
+
+.login-box input{
+width:100%;
+padding:14px;
+margin-top:10px;
+border:1px solid #cbd5e1;
+border-radius:12px;
+font-size:15px;
+}
+
+.login-btn{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+border-radius:14px;
+background:#2563eb;
+color:white;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.login-btn:hover{
+background:#1d4ed8;
+}
+
+#error{
+margin-top:15px;
+text-align:center;
+color:red;
+display:none;
+font-weight:bold;
+}
+
+/* SIDEBAR */
 
 .sidebar{
 width:280px;
@@ -36,7 +108,7 @@ overflow:auto;
 
 .logo{
 text-align:center;
-margin-bottom:30px;
+margin-bottom:35px;
 }
 
 .logo h1{
@@ -46,8 +118,8 @@ line-height:34px;
 
 .logo p{
 margin-top:10px;
-font-size:13px;
 color:#94a3b8;
+font-size:13px;
 }
 
 .principal-box{
@@ -61,7 +133,7 @@ text-align:center;
 .menu button{
 width:100%;
 padding:15px;
-margin-bottom:12px;
+margin-bottom:14px;
 border:none;
 border-radius:14px;
 background:#1e293b;
@@ -76,6 +148,8 @@ transition:0.3s;
 background:#2563eb;
 transform:translateX(5px);
 }
+
+/* MAIN */
 
 .main{
 margin-left:280px;
@@ -101,6 +175,8 @@ margin-top:8px;
 color:#64748b;
 }
 
+/* CARDS */
+
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -121,9 +197,11 @@ margin-bottom:10px;
 }
 
 .card h2{
-font-size:32px;
+font-size:34px;
 color:#0f172a;
 }
+
+/* PANELS */
 
 .panel{
 background:white;
@@ -191,9 +269,10 @@ color:green;
 color:red;
 }
 
+/* TABLE */
+
 .table-container{
 overflow:auto;
-max-height:650px;
 }
 
 table{
@@ -210,50 +289,12 @@ text-align:left;
 
 table th{
 background:#f8fafc;
-position:sticky;
-top:0;
 }
 
-.footer{
-text-align:center;
-margin-top:25px;
-font-size:13px;
-color:#64748b;
-}
-
-#loginScreen{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:linear-gradient(135deg,#0f172a,#1e293b);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:99999;
-}
-
-.login-box{
-width:420px;
-background:white;
-padding:40px;
-border-radius:25px;
-box-shadow:0 10px 40px rgba(0,0,0,0.3);
-}
-
-.login-box h1{
-text-align:center;
-margin-bottom:10px;
-}
-
-.login-box p{
-text-align:center;
-margin-bottom:25px;
-color:#64748b;
-}
+/* MOBILE */
 
 @media(max-width:900px){
+
 body{
 flex-direction:column;
 }
@@ -266,69 +307,125 @@ position:relative;
 .main{
 margin-left:0;
 }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
 <!-- LOGIN -->
+
 <div id="loginScreen">
+
 <div class="login-box">
 
 <h1>🏫 SCHOOL ERP</h1>
+
 <p>THE EDUCATION FOUNTAIN MODEL SCHOOL</p>
 
-<div class="label">Username</div>
-<input type="text" id="loginUsername" placeholder="Enter Username">
+<input
+type="text"
+id="loginUsername"
+placeholder="Username"
+/>
 
-<div class="label">Password</div>
-<input type="password" id="loginPassword" placeholder="Enter Password">
+<input
+type="password"
+id="loginPassword"
+placeholder="Password"
+/>
 
-<button class="btn" onclick="loginSystem()">🔐 LOGIN</button>
+<button
+class="login-btn"
+onclick="loginSystem()"
+>
+🔐 LOGIN
+</button>
 
-<div id="loginError" class="status error">
-❌ Invalid Username or Password
+<div id="error">
+Invalid Username or Password
 </div>
 
 </div>
+
 </div>
 
 <!-- SIDEBAR -->
+
 <div class="sidebar">
 
 <div class="logo">
-<h1>THE EDUCATION<br>FOUNTAIN MODEL SCHOOL</h1>
-<p>Professional School ERP Dashboard</p>
+
+<h1>
+THE EDUCATION <br>
+FOUNTAIN MODEL SCHOOL
+</h1>
+
+<p>
+Professional School ERP Dashboard
+</p>
+
 </div>
 
 <div class="principal-box">
+
 <h3>Principal</h3>
 <h2>MUHAMMAD YASEEN</h2>
+
 </div>
 
 <div class="menu">
-<button onclick="showSection('dashboard')">📊 Dashboard</button>
-<button onclick="showSection('homework')">📚 Homework</button>
-<button onclick="showSection('students')">👨‍🎓 Students</button>
-<button onclick="showSection('history')">🕘 Homework History</button>
-<button onclick="showSection('fees')">💰 Fee Reminder</button>
-<button onclick="showSection('notices')">📢 Notices</button>
-<button onclick="logoutSystem()">🚪 Logout</button>
+
+<button onclick="showSection('dashboard')">
+📊 Dashboard
+</button>
+
+<button onclick="showSection('homework')">
+📚 Homework
+</button>
+
+<button onclick="showSection('students')">
+👨‍🎓 Students
+</button>
+
+<button onclick="showSection('history')">
+🕘 Homework History
+</button>
+
+<button onclick="showSection('fees')">
+💰 Fee Reminder
+</button>
+
+<button onclick="logoutSystem()">
+🚪 Logout
+</button>
+
 </div>
 
 </div>
 
 <!-- MAIN -->
+
 <div class="main">
 
 <div class="topbar">
+
 <h1>School Management Dashboard</h1>
-<p>Manage Students, Homework & WhatsApp Notifications Professionally</p>
+
+<p>
+Manage Homework, Students &
+WhatsApp Notifications
+</p>
+
 </div>
 
 <!-- DASHBOARD -->
+
 <div id="dashboard" class="section">
+
 <div class="cards">
 
 <div class="card">
@@ -347,20 +444,30 @@ margin-left:0;
 </div>
 
 <div class="card">
-<h3>Server</h3>
+<h3>System</h3>
 <h2>ONLINE</h2>
 </div>
 
 </div>
+
 </div>
 
 <!-- HOMEWORK -->
-<div id="homework" class="section panel" style="display:none;">
+
+<div
+id="homework"
+class="section panel"
+style="display:none;"
+>
+
 <h2>📚 Send Homework</h2>
 
 <div class="label">Class</div>
+
 <select id="class">
+
 <option value="">Select Class</option>
+
 <option>Nursery</option>
 <option>KG1</option>
 <option>KG2</option>
@@ -375,65 +482,125 @@ margin-left:0;
 <option>9</option>
 <option>10</option>
 <option>11</option>
+
 </select>
 
 <div class="label">Subject</div>
-<input type="text" id="subject" placeholder="Example: English">
+
+<input
+type="text"
+id="subject"
+placeholder="English"
+/>
 
 <div class="label">Homework</div>
-<textarea id="homeworkText" placeholder="Write Homework Here..."></textarea>
 
-<button class="btn" onclick="sendHomework()">🚀 Send Homework</button>
+<textarea
+id="homeworkText"
+placeholder="Write Homework..."
+></textarea>
+
+<button
+class="btn"
+onclick="sendHomework()"
+>
+🚀 Send Homework
+</button>
+
 <div id="status" class="status"></div>
+
 </div>
 
 <!-- STUDENTS -->
-<div id="students" class="section panel" style="display:none;">
+
+<div
+id="students"
+class="section panel"
+style="display:none;"
+>
+
 <h2>👨‍🎓 Student Records</h2>
 
-<input type="text" id="searchStudent" placeholder="🔍 Search Student..." onkeyup="searchStudent()" style="margin-bottom:20px;">
+<input
+type="text"
+id="searchStudent"
+placeholder="🔍 Search Student..."
+onkeyup="searchStudent()"
+style="margin-bottom:20px;"
+/>
 
 <div class="table-container">
+
 <table>
+
 <thead>
+
 <tr>
 <th>Student Name</th>
 <th>Class</th>
 <th>Father</th>
 <th>Phone</th>
 </tr>
+
 </thead>
+
 <tbody id="studentTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 <!-- HISTORY -->
-<div id="history" class="section panel" style="display:none;">
+
+<div
+id="history"
+class="section panel"
+style="display:none;"
+>
+
 <h2>🕘 Homework History</h2>
 
 <div class="table-container">
+
 <table>
+
 <thead>
+
 <tr>
 <th>Date</th>
 <th>Class</th>
 <th>Subject</th>
 <th>Homework</th>
 </tr>
+
 </thead>
+
 <tbody id="historyTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 <!-- FEES -->
-<div id="fees" class="section panel" style="display:none;">
-<h2>💰 Send Fee Reminder</h2>
+
+<div
+id="fees"
+class="section panel"
+style="display:none;"
+>
+
+<h2>💰 Fee Reminder</h2>
 
 <div class="label">Class</div>
+
 <select id="feeClass">
+
 <option value="">Select Class</option>
+
 <option>Nursery</option>
 <option>KG1</option>
 <option>KG2</option>
@@ -448,186 +615,241 @@ margin-left:0;
 <option>9</option>
 <option>10</option>
 <option>11</option>
+
 </select>
 
-<div class="label">Fee Message</div>
-<textarea id="feeMessage">Dear Parents,
-Please submit monthly school fee on time.
+<div class="label">Message</div>
 
-🏫 THE EDUCATION FOUNTAIN MODEL SCHOOL</textarea>
+<textarea id="feeMessage">
 
-<button class="btn" onclick="sendFeeReminder()">💸 Send Fee Reminder</button>
+Dear Parents,
+
+Please submit school fee on time.
+
+Thanks.
+
+</textarea>
+
+<button
+class="btn"
+onclick="sendFeeReminder()"
+>
+💸 Send Fee Reminder
+</button>
+
 <div id="feeStatus" class="status"></div>
-</div>
 
-<!-- NOTICES -->
-<div id="notices" class="section panel" style="display:none;">
-<h2>📢 School Notices</h2>
-
-<div class="label">Notice Title</div>
-<input type="text" placeholder="Enter Notice Title">
-
-<div class="label">Notice Details</div>
-<textarea placeholder="Write Notice Here..."></textarea>
-
-<button class="btn">📢 Publish Notice</button>
-</div>
-
-<div class="footer">
-© 2026 THE EDUCATION FOUNTAIN MODEL SCHOOL
 </div>
 
 </div>
 
 <script>
 
-// LOGIN DETAILS
 const ADMIN_USERNAME = "admin";
 const ADMIN_PASSWORD = "12345";
 
-// LOGIN FUNCTION
+const API_URL =
+"https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQedCG_AZqQGC3MrWOFEGPsnbBOnwaQtcMtluTD5zHm5Rg1kTtO2y5QjwdGdNAP_hzqlL-lxi-IrVv6Xsxwu6r9jlamiNmNgZB9aWv_t6eTlkheUv8DeU_6JFJGjB9g3gV9khPmYwrECNCaMtfGlb89yR9dwWDp-Sd4vuBsk1sJmIPXD8lYc_o013cc9tS2MJQSLIMf25RisAUkwslqynQAMgS4rI0zSvYjb-UnrL728sehNRudeeobqkTKc2aGIAudAMhVLwbRNYVk2Aw&lib=McJPM91cHnjLpnVey1OX2be0fLL19UkVS";
+
+let homeworkHistory = [];
+
+/* LOGIN */
+
 function loginSystem(){
 
-let username = document.getElementById("loginUsername").value.trim();
-let password = document.getElementById("loginPassword").value.trim();
+let username =
+document.getElementById("loginUsername").value.trim();
 
-if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD){
+let password =
+document.getElementById("loginPassword").value.trim();
 
-document.getElementById("loginScreen").style.display = "none";
+if(
+username === ADMIN_USERNAME &&
+password === ADMIN_PASSWORD
+){
+
 localStorage.setItem("schoolLogin","true");
+
+document.getElementById("loginScreen")
+.style.display = "none";
 
 }else{
 
-document.getElementById("loginError").style.display = "block";
+document.getElementById("error")
+.style.display = "block";
 
 }
+
 }
 
-// ENTER BUTTON LOGIN
+/* ENTER KEY LOGIN */
 
-document.addEventListener("keydown",function(event){
-if(event.key === "Enter"){
+document.addEventListener("keypress",function(e){
+
+if(e.key === "Enter"){
+
 loginSystem();
+
 }
+
 });
 
-// AUTO LOGIN
+/* AUTO LOGIN */
+
 window.onload = function(){
 
-let isLoggedIn = localStorage.getItem("schoolLogin");
+if(localStorage.getItem("schoolLogin") === "true"){
 
-if(isLoggedIn === "true"){
-document.getElementById("loginScreen").style.display = "none";
+document.getElementById("loginScreen")
+.style.display = "none";
+
 }
 
 loadStudents();
 
 }
 
-// LOGOUT
+/* LOGOUT */
+
 function logoutSystem(){
+
 localStorage.removeItem("schoolLogin");
+
 location.reload();
+
 }
 
-// SHOW SECTION
+/* SECTION */
+
 function showSection(sectionId){
 
-let sections = document.querySelectorAll(".section");
+let sections =
+document.querySelectorAll(".section");
 
 sections.forEach(section => {
+
 section.style.display = "none";
+
 });
 
-document.getElementById(sectionId).style.display = "block";
+document.getElementById(sectionId)
+.style.display = "block";
+
 }
 
-// HOMEWORK HISTORY
-let homeworkHistory = [];
+/* LOAD STUDENTS */
 
-// API URL
-const API_URL = "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQedCG_AZqQGC3MrWOFEGPsnbBOnwaQtcMtluTD5zHm5Rg1kTtO2y5QjwdGdNAP_hzqlL-lxi-IrVv6Xsxwu6r9jlamiNmNgZB9aWv_t6eTlkheUv8DeU_6JFJGjB9g3gV9khPmYwrECNCaMtfGlb89yR9dwWDp-Sd4vuBsk1sJmIPXD8lYc_o013cc9tS2MJQSLIMf25RisAUkwslqynQAMgS4rI0zSvYjb-UnrL728sehNRudeeobqkTKc2aGIAudAMhVLwbRNYVk2Aw&lib=McJPM91cHnjLpnVey1OX2be0fLL19UkVS";
-
-// LOAD STUDENTS
 async function loadStudents(){
 
 try{
 
-let response = await fetch(API_URL);
-let data = await response.json();
+let response =
+await fetch(API_URL);
 
-let tbody = document.getElementById("studentTable");
+let data =
+await response.json();
+
+let tbody =
+document.getElementById("studentTable");
+
 tbody.innerHTML = "";
 
 let total = 0;
 
 Object.keys(data).forEach(className => {
 
-let students = data[className];
-
-students.forEach(student => {
+data[className].forEach(student => {
 
 total++;
 
 tbody.innerHTML += `
+
 <tr>
+
 <td>${student.student || ""}</td>
 <td>${className}</td>
 <td>${student.father || ""}</td>
 <td>${student.phone || ""}</td>
+
 </tr>
+
 `;
 
 });
 
 });
 
-document.getElementById("totalStudents").innerText = total;
+document.getElementById("totalStudents")
+.innerHTML = total;
 
 }catch(error){
-console.log(error);
+
 alert("Student Data Load Error");
-}
+
 }
 
-// SEARCH STUDENT
+}
+
+/* SEARCH */
+
 function searchStudent(){
 
-let input = document.getElementById("searchStudent").value.toLowerCase();
+let input =
+document.getElementById("searchStudent")
+.value
+.toLowerCase();
 
-let rows = document.querySelectorAll("#studentTable tr");
+let rows =
+document.querySelectorAll("#studentTable tr");
 
 rows.forEach(row => {
 
-let text = row.innerText.toLowerCase();
+let text =
+row.innerText.toLowerCase();
 
-row.style.display = text.includes(input) ? "" : "none";
+row.style.display =
+text.includes(input)
+? ""
+: "none";
 
 });
+
 }
 
-// SEND HOMEWORK
+/* HOMEWORK */
+
 async function sendHomework(){
 
-let cls = document.getElementById("class").value;
-let subject = document.getElementById("subject").value;
-let homework = document.getElementById("homeworkText").value;
-let status = document.getElementById("status");
+let cls =
+document.getElementById("class").value;
+
+let subject =
+document.getElementById("subject").value;
+
+let homework =
+document.getElementById("homeworkText").value;
+
+let status =
+document.getElementById("status");
 
 if(!cls || !subject || !homework){
+
 status.style.display = "block";
 status.className = "status error";
-status.innerHTML = "❌ Please fill all fields";
+status.innerHTML = "❌ Fill all fields";
+
 return;
+
 }
 
 status.style.display = "block";
-status.className = "status";
-status.innerHTML = "⏳ Sending Homework...";
+status.innerHTML = "⏳ Sending...";
 
 try{
 
-await fetch("http://localhost:3000/send-homework",{
+await fetch(
+"http://localhost:3000/send-homework",
+{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
@@ -637,68 +859,91 @@ className:cls,
 subject:subject,
 homework:homework
 })
-});
+}
+);
 
 status.className = "status success";
-status.innerHTML = "✅ Homework Sent Successfully!";
+status.innerHTML = "✅ Homework Sent";
 
 homeworkHistory.unshift({
+
 date:new Date().toLocaleString(),
 className:cls,
 subject:subject,
 homework:homework
+
 });
 
 loadHistory();
 
 }catch(error){
+
 status.className = "status error";
 status.innerHTML = "❌ Server Error";
-}
+
 }
 
-// LOAD HISTORY
+}
+
+/* HISTORY */
+
 function loadHistory(){
 
-let table = document.getElementById("historyTable");
+let table =
+document.getElementById("historyTable");
 
 table.innerHTML = "";
 
 homeworkHistory.forEach(item => {
 
 table.innerHTML += `
+
 <tr>
+
 <td>${item.date}</td>
 <td>${item.className}</td>
 <td>${item.subject}</td>
 <td>${item.homework}</td>
+
 </tr>
+
 `;
 
 });
+
 }
 
-// SEND FEE REMINDER
+/* FEES */
+
 async function sendFeeReminder(){
 
-let cls = document.getElementById("feeClass").value;
-let message = document.getElementById("feeMessage").value;
-let status = document.getElementById("feeStatus");
+let cls =
+document.getElementById("feeClass").value;
+
+let message =
+document.getElementById("feeMessage").value;
+
+let status =
+document.getElementById("feeStatus");
 
 if(!cls || !message){
+
 status.style.display = "block";
 status.className = "status error";
-status.innerHTML = "❌ Please fill all fields";
+status.innerHTML = "❌ Fill all fields";
+
 return;
+
 }
 
 status.style.display = "block";
-status.className = "status";
-status.innerHTML = "⏳ Sending Fee Reminder...";
+status.innerHTML = "⏳ Sending...";
 
 try{
 
-await fetch("http://localhost:3000/send-fee-reminder",{
+await fetch(
+"http://localhost:3000/send-fee-reminder",
+{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
@@ -707,32 +952,22 @@ body:JSON.stringify({
 className:cls,
 message:message
 })
-});
+}
+);
 
 status.className = "status success";
-status.innerHTML = "✅ Fee Reminder Sent Successfully!";
+status.innerHTML = "✅ Fee Reminder Sent";
 
 }catch(error){
+
 status.className = "status error";
 status.innerHTML = "❌ Server Error";
+
 }
+
 }
 
 </script>
 
 </body>
 </html>
-```
-
-# LOGIN DETAILS
-
-Username: `admin`
-Password: `12345`
-
-# IMPORTANT
-
-Purana sara code delete kar dein.
-
-Is poore code ko copy karke `index.html` me paste kar dein.
-
-Uske baad browser me open karein.
