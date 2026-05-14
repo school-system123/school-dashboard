@@ -583,7 +583,7 @@ ticks:{color:'white'}
 
 async function checkWhatsappStatus(){
 try{
-let response = await fetch(' https://surgical-saturday-grew.ngrok-free.dev -> http://localhost:3000 /status');
+let response = await fetch('https://surgical-saturday-grew.ngrok-free.dev -> http://localhost:3000 /status');
 let data = await response.json();
 document.getElementById('waStatus').innerHTML = data.connected ? 'ACTIVE' : 'INACTIVE';
 }catch(error){
