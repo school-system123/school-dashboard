@@ -620,13 +620,12 @@ flex-direction:column;
 gap:18px;
 ">
 
-<div style="
-padding:15px;
-border-radius:18px;
-background:rgba(255,255,255,0.05);
+<div id="activityList"
+style="
+display:flex;
+flex-direction:column;
+gap:18px;
 ">
-
-✅ Homework sent to Class 8
 
 </div>
 
@@ -990,6 +989,8 @@ const API_URL =
 
 let homeworkHistory = [];
 
+let recentActivities = [];
+
 let analyticsData = {};
 
 let myChart;
@@ -1047,7 +1048,7 @@ document.getElementById("loginScreen")
 }
 
 loadStudents();
-
+  
 startClock();
 
 }
@@ -1185,6 +1186,9 @@ Object.keys(data).length
 /* CHART */
 
 loadChart();
+addActivity(
+`👨‍🎓 ${totalStudents} students loaded successfully`
+);  
 
 }catch(error){
 
@@ -1288,6 +1292,9 @@ status.className =
 
 status.innerHTML =
 "✅ Homework Sent Successfully";
+addActivity(
+`📚 Homework sent to Class ${cls}`
+);
 
 homeworkHistory.unshift({
 
@@ -1299,6 +1306,61 @@ homework:homework
 });
 
 loadHistory();
+function addActivity(message){
+
+recentActivities.unshift({
+
+time:new Date().toLocaleTimeString(),
+message:message
+
+});
+
+if(recentActivities.length > 8){
+
+recentActivities.pop();
+
+}
+
+renderActivities();
+
+}
+
+function renderActivities(){
+
+let container =
+document.getElementById("activityList");
+
+container.innerHTML = "";
+
+recentActivities.forEach(item=>{
+
+container.innerHTML += `
+
+<div style="
+padding:15px;
+border-radius:18px;
+background:rgba(255,255,255,0.05);
+">
+
+<div style="
+font-size:13px;
+color:#94a3b8;
+margin-bottom:6px;
+">
+
+${item.time}
+
+</div>
+
+${item.message}
+
+</div>
+
+`;
+
+});
+
+}
 
 }
 
@@ -1364,6 +1426,9 @@ status.className =
 
 status.innerHTML =
 "✅ Fee Reminder Sent";
+addActivity(
+`💰 Fee reminder sent to Class ${cls}`
+);
 
 }
 
