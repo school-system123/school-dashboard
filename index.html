@@ -1163,7 +1163,18 @@ table.innerHTML += `
 
 });
 
-}  
+} 
+// =========================
+// LOGOUT SYSTEM
+// =========================
+
+function logoutSystem(){
+
+localStorage.removeItem("schoolLogin");
+
+location.reload();
+
+}
 function searchStudent(){
 
   let input =
