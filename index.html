@@ -606,14 +606,45 @@ let homeworkHistory = [];
 let recentActivities = [];
 let myChart;
 
-/* LOADER */
+/* LOGIN */
 
-function showLoader(){
-document.getElementById('loader').style.display='flex';
+function loginSystem(){
+
+let email =
+document.getElementById('loginUsername').value.trim();
+
+let password =
+document.getElementById('loginPassword').value.trim();
+
+if(
+email === 'admin@gmail.com' &&
+password === '123456'
+){
+
+document.getElementById('loginScreen').style.display='none';
+
+localStorage.setItem('schoolLogin','true');
+
+}else{
+
+document.getElementById('error').style.display='block';
+
 }
 
-function hideLoader(){
-document.getElementById('loader').style.display='none';
+}
+
+function logoutSystem(){
+
+localStorage.removeItem('schoolLogin');
+
+location.reload();
+
+}
+
+function resetPassword(){
+
+alert('Contact Admin');
+
 }
 
 /* SECTION */
@@ -621,7 +652,9 @@ document.getElementById('loader').style.display='none';
 function showSection(id){
 
 document.querySelectorAll('.section').forEach(sec=>{
+
 sec.style.display='none';
+
 });
 
 document.getElementById(id).style.display='block';
@@ -637,8 +670,10 @@ time:new Date().toLocaleTimeString(),
 message
 });
 
-if(recentActivities.length>8){
+if(recentActivities.length > 8){
+
 recentActivities.pop();
+
 }
 
 renderActivities();
@@ -655,12 +690,23 @@ container.innerHTML='';
 recentActivities.forEach(item=>{
 
 container.innerHTML += `
+
 <div class="activity-item">
-<div style="font-size:12px;color:#94a3b8;margin-bottom:6px;">
+
+<div style="
+font-size:12px;
+color:#94a3b8;
+margin-bottom:6px;
+">
+
 ${item.time}
+
 </div>
+
 ${item.message}
+
 </div>
+
 `;
 
 });
@@ -672,8 +718,6 @@ ${item.message}
 async function loadStudents(){
 
 try{
-
-showLoader();
 
 const response =
 await fetch(API_URL);
@@ -698,9 +742,9 @@ classSelect.innerHTML =
 feeClass.innerHTML =
 '<option value="">Select Class</option>';
 
-analyticsData={};
+analyticsData = {};
 
-let total=0;
+let total = 0;
 
 Object.keys(data).forEach(className=>{
 
@@ -711,23 +755,23 @@ data[className].length;
 
 total += data[className].length;
 
-classSelect.innerHTML += `
-<option>${className}</option>
-`;
+classSelect.innerHTML +=
+`<option>${className}</option>`;
 
-feeClass.innerHTML += `
-<option>${className}</option>
-`;
+feeClass.innerHTML +=
+`<option>${className}</option>`;
 
 data[className].forEach(student=>{
 
 tbody.innerHTML += `
+
 <tr>
 <td>${student.student || ''}</td>
 <td>${className}</td>
 <td>${student.father || ''}</td>
 <td>${student.phone || ''}</td>
 </tr>
+
 `;
 
 });
@@ -746,11 +790,7 @@ addActivity(
 `👨‍🎓 ${total} students loaded successfully`
 );
 
-hideLoader();
-
 }catch(error){
-
-hideLoader();
 
 console.log(error);
 
@@ -780,7 +820,7 @@ row.innerText.toLowerCase().includes(input)
 
 }
 
-/* SEND HOMEWORK */
+/* HOMEWORK */
 
 async function sendHomework(){
 
@@ -802,7 +842,7 @@ return;
 }
 
 document.getElementById('status')
-.innerHTML='⏳ Sending Homework...';
+.innerHTML='⏳ Sending...';
 
 try{
 
@@ -830,7 +870,7 @@ if(result.success){
 
 document.getElementById('status')
 .innerHTML =
-`✅ Homework Sent To ${result.totalSent} Students`;
+`✅ Sent To ${result.totalSent} Students`;
 
 addActivity(
 `📚 Homework sent to ${cls}`
@@ -850,7 +890,7 @@ loadHistory();
 }else{
 
 document.getElementById('status')
-.innerHTML='❌ Failed To Send';
+.innerHTML='❌ Failed';
 
 }
 
@@ -860,80 +900,6 @@ document.getElementById('status')
 .innerHTML='❌ Server Offline';
 
 }
-
-}
-
-/* ===================================== */
-/* FEE REMINDER */
-/* ===================================== */
-
-async function sendFeeReminder(){
-
-let cls =
-document.getElementById('feeClass').value;
-
-let message =
-document.getElementById('feeMessage').value;
-
-if(!cls || !message){
-
-alert('Fill all fields');
-
-return;
-
-}
-
-document.getElementById('feeStatus')
-.innerHTML='⏳ Sending Fee Reminder...';
-
-try{
-
-let response =
-await fetch('http://localhost:3000/send-fee-reminder',{
-
-method:'POST',
-
-headers:{
-'Content-Type':'application/json'
-},
-
-body:JSON.stringify({
-className:cls,
-message
-})
-
-});
-
-let result =
-await response.json();
-
-if(result.success){
-
-document.getElementById('feeStatus')
-.innerHTML =
-`✅ Fee Reminder Sent To ${result.totalSent} Students`;
-
-addActivity(
-`💰 Fee reminder sent to ${cls}`
-);
-
-}else{
-
-document.getElementById('feeStatus')
-.innerHTML='❌ Failed To Send';
-
-}
-
-}catch(error){
-
-document.getElementById('feeStatus')
-.innerHTML='❌ Server Offline';
-
-}
-
-}
-
-hideLoader();
 
 }
 
@@ -949,19 +915,21 @@ table.innerHTML='';
 homeworkHistory.forEach(item=>{
 
 table.innerHTML += `
+
 <tr>
 <td>${item.date}</td>
 <td>${item.className}</td>
 <td>${item.subject}</td>
 <td>${item.homework}</td>
 </tr>
+
 `;
 
 });
 
 }
 
-/* SEND FEES */
+/* FEES */
 
 async function sendFeeReminder(){
 
@@ -979,10 +947,8 @@ return;
 
 }
 
-showLoader();
-
 document.getElementById('feeStatus')
-.innerHTML='⏳ Sending Fee Reminder...';
+.innerHTML='⏳ Sending...';
 
 try{
 
@@ -1009,7 +975,7 @@ if(result.success){
 
 document.getElementById('feeStatus')
 .innerHTML =
-`✅ Fee Reminder Sent To ${result.totalSent} Students`;
+`✅ Sent To ${result.totalSent} Students`;
 
 addActivity(
 `💰 Fee reminder sent to ${cls}`
@@ -1018,7 +984,7 @@ addActivity(
 }else{
 
 document.getElementById('feeStatus')
-.innerHTML='❌ Failed To Send';
+.innerHTML='❌ Failed';
 
 }
 
@@ -1028,8 +994,6 @@ document.getElementById('feeStatus')
 .innerHTML='❌ Server Offline';
 
 }
-
-hideLoader();
 
 }
 
@@ -1041,7 +1005,9 @@ const ctx =
 document.getElementById('myChart');
 
 if(myChart){
+
 myChart.destroy();
+
 }
 
 myChart = new Chart(ctx,{
@@ -1088,7 +1054,7 @@ color:'white'
 
 }
 
-/* WHATSAPP */
+/* WHATSAPP STATUS */
 
 async function checkWhatsappStatus(){
 
@@ -1115,7 +1081,28 @@ document.getElementById('waStatus')
 
 }
 
-<script>
+/* ONLOAD */
+
+window.onload = function(){
+
+loadStudents();
+
+checkWhatsappStatus();
+
+document.getElementById('liveDate')
+.innerHTML =
+new Date().toDateString();
+
+if(localStorage.getItem('schoolLogin')==='true'){
+
+document.getElementById('loginScreen')
+.style.display='none';
+
+}
+
+}
+
+</script>
 
 function loginSystem(){
 
