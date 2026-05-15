@@ -590,17 +590,17 @@ async function loadStudents(){
 
     let totalClasses = 0;
 
-    // YE SHEETS IGNORE HONGI
+    // YE SHEETS COUNT NAHI HONGI
     const ignoredSheets = [
       "Attendance",
-      "Sheet1",
       "Fees",
-      "Admin"
+      "Admin",
+      "Sheet1"
     ];
 
     Object.keys(data).forEach(className => {
 
-      // AGAR IGNORE LIST ME HAI TO SKIP
+      // EXTRA TABS SKIP
       if(ignoredSheets.includes(className)){
         return;
       }
@@ -633,11 +633,10 @@ async function loadStudents(){
 
     });
 
-    // TOTAL STUDENTS
+    // DASHBOARD UPDATE
     document.getElementById("totalStudents")
     .innerHTML = totalStudents;
 
-    // TOTAL CLASSES
     document.getElementById("totalClasses")
     .innerHTML = totalClasses;
 
