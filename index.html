@@ -838,7 +838,120 @@ document.getElementById('waStatus')
 }
 
 /* ONLOAD */
+/* =========================
+ATTENDANCE SYSTEM
+========================= */
 
+async function loadAttendanceStudents(){
+
+try{
+
+const response = await fetch(API_URL);
+
+const data = await response.json();
+
+const attendanceClass =
+document.getElementById('attendanceClass');
+
+attendanceClass.innerHTML =
+'<option value="">Select Class</option>';
+
+Object.keys(data).forEach(className=>{
+
+attendanceClass.innerHTML +=
+`<option>${className}</option>`;
+
+});
+
+attendanceClass.onchange = function(){
+
+let cls = this.value;
+
+const tbody =
+document.getElementById('attendanceTable');
+
+tbody.innerHTML = '';
+
+if(!data[cls]) return;
+
+data[cls].forEach(student=>{
+
+tbody.innerHTML += `
+
+<tr>
+
+<td>${student.student}</td>
+
+<td>
+<input
+type="radio"
+name="${student.student}"
+value="Present"
+checked>
+</td>
+
+<td>
+<input
+type="radio"
+name="${student.student}"
+value="Absent">
+</td>
+
+<td>
+<input
+type="radio"
+name="${student.student}"
+value="Leave">
+</td>
+
+</tr>
+
+`;
+
+});
+
+};
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+/* SAVE ATTENDANCE */
+
+function saveAttendance(){
+
+let cls =
+document.getElementById('attendanceClass').value;
+
+let date =
+document.getElementById('attendanceDate').value;
+
+if(!cls || !date){
+
+alert('Select class and date');
+
+return;
+
+}
+
+let rows =
+document.querySelectorAll('#attendanceTable tr');
+
+let total = rows.length;
+
+document.getElementById('attendanceStatus')
+.innerHTML =
+`✅ Attendance Saved For ${total} Students`;
+
+addActivity(
+`📋 Attendance saved for ${cls}`
+);
+
+}
 window.onload = function(){
 
 loadStudents();
