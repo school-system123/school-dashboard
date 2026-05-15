@@ -575,76 +575,81 @@ document.getElementById(id)
 
 async function loadStudents(){
 
-try{
+  try{
 
-const response = await fetch(API_URL);
+    let response = await fetch(API_URL);
 
-const data = await response.json();
+    let data = await response.json();
 
-const tbody =
-document.getElementById('studentTable');
+    let tbody =
+    document.getElementById("studentTable");
 
-const classSelect =
-document.getElementById('class');
+    tbody.innerHTML = "";
 
-const feeClass =
-document.getElementById('feeClass');
+    let totalStudents = 0;
 
-tbody.innerHTML='';
+    let totalClasses = 0;
 
-classSelect.innerHTML =
-'<option value="">Select Class</option>';
+    // YE SHEETS IGNORE HONGI
+    const ignoredSheets = [
+      "Attendance",
+      "Sheet1",
+      "Fees",
+      "Admin"
+    ];
 
-feeClass.innerHTML =
-'<option value="">Select Class</option>';
+    Object.keys(data).forEach(className => {
 
-analyticsData = {};
+      // AGAR IGNORE LIST ME HAI TO SKIP
+      if(ignoredSheets.includes(className)){
+        return;
+      }
 
-let total = 0;
+      totalClasses++;
 
-Object.keys(data).forEach(className=>{
+      let students = data[className];
 
-if(!Array.isArray(data[className])) return;
+      students.forEach(student => {
 
-analyticsData[className] =
-data[className].length;
+        totalStudents++;
 
-total += data[className].length;
+        tbody.innerHTML += `
 
-classSelect.innerHTML +=
-`<option>${className}</option>`;
+        <tr>
 
-feeClass.innerHTML +=
-`<option>${className}</option>`;
+          <td>${student.student || ""}</td>
 
-data[className].forEach(student=>{
+          <td>${className}</td>
 
-tbody.innerHTML += `
-<tr>
-<td>${student.student || ''}</td>
-<td>${className}</td>
-<td>${student.father || ''}</td>
-<td>${student.phone || ''}</td>
-</tr>
-`;
+          <td>${student.father || ""}</td>
 
-});
+          <td>${student.phone || ""}</td>
 
-});
+        </tr>
 
-document.getElementById('totalStudents')
-.innerHTML = total;
+        `;
 
-document.getElementById('totalClasses')
-.innerHTML = Object.keys(analyticsData).length;
+      });
 
-loadChart();
+    });
 
-}catch(error){
+    // TOTAL STUDENTS
+    document.getElementById("totalStudents")
+    .innerHTML = totalStudents;
 
-console.log(error);
+    // TOTAL CLASSES
+    document.getElementById("totalClasses")
+    .innerHTML = totalClasses;
 
-}
+  }
+
+  catch(error){
+
+    console.log(error);
+
+    alert("Student Data Load Error");
+
+  }
 
 }
 
