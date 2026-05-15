@@ -492,55 +492,6 @@ SEND FEE REMINDER
 
 <script>
 
-const API_URL =
-https://script.google.com/macros/s/AKfycbw8b-iV5wHuztg0PJryrWZuEpzhP8p0aUYp79eAZBNug0K0jkianda8VJ55QOCm7bk7/exec
-
-let analyticsData = {};
-let homeworkHistory = [];
-let recentActivities = [];
-let myChart;
-
-/* LOGIN */
-
-function loginSystem(){
-
-let email =
-document.getElementById('loginUsername').value.trim();
-
-let password =
-document.getElementById('loginPassword').value.trim();
-
-if(
-email === 'admin@gmail.com' &&
-password === '123456'
-){
-
-document.getElementById('loginScreen').style.display='none';
-
-localStorage.setItem('schoolLogin','true');
-
-}else{
-
-document.getElementById('error').style.display='block';
-
-}
-
-}
-
-function logoutSystem(){
-
-localStorage.removeItem('schoolLogin');
-
-location.reload();
-
-}
-
-function resetPassword(){
-
-alert('Contact Admin');
-
-}
-
 /* SECTION */
 
 function showSection(id){
