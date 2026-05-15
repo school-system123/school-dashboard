@@ -232,13 +232,6 @@ border-bottom:1px solid rgba(255,255,255,0.08);
 text-align:left;
 }
 
-.activity-item{
-padding:15px;
-border-radius:15px;
-background:rgba(255,255,255,0.06);
-margin-bottom:10px;
-}
-
 .status{
 margin-top:15px;
 font-weight:700;
@@ -314,9 +307,8 @@ margin-left:0;
 <button onclick="showSection('fees')">💰 Fees</button>
 
 <button onclick="showSection('attendance')">📅 Attendance</button>
-  
-<button onclick="logoutSystem()">🚪 Logout</button>
 
+<button onclick="logoutSystem()">🚪 Logout</button>
 
 </div>
 
@@ -346,8 +338,8 @@ margin-left:0;
 </div>
 
 <div class="card">
-  <h3>Total Classes</h3>
-  <h2 id="totalClasses">0</h2>
+<h3>Total Classes</h3>
+<h2 id="totalClasses">0</h2>
 </div>
 
 <div class="card">
@@ -458,6 +450,7 @@ SEND FEE REMINDER
 <div id="feeStatus" class="status"></div>
 
 </div>
+
 <!-- ATTENDANCE -->
 
 <div id="attendance"
@@ -502,6 +495,7 @@ SAVE ATTENDANCE
 class="status"></div>
 
 </div>
+
 </div>
 
 <script>
@@ -575,80 +569,112 @@ document.getElementById(id)
 
 async function loadStudents(){
 
-  try{
+try{
 
-    let response = await fetch(API_URL);
+let response = await fetch(API_URL);
 
-    let data = await response.json();
+let data = await response.json();
 
-    let tbody =
-    document.getElementById("studentTable");
+let tbody =
+document.getElementById("studentTable");
 
-    tbody.innerHTML = "";
+tbody.innerHTML = "";
 
-    let totalStudents = 0;
+let totalStudents = 0;
 
-    let totalClasses = 0;
+let totalClasses = 0;
 
-    // YE SHEETS COUNT NAHI HONGI
-    const ignoredSheets = [
-      "Attendance",
-      "Fees",
-      "Admin",
-      "Sheet1"
-    ];
+analyticsData = {};
 
-    Object.keys(data).forEach(className => {
+const ignoredSheets = [
+"Attendance",
+"attendance",
+"Fees",
+"Admin",
+"Sheet1"
+];
 
-      // EXTRA TABS SKIP
-      if(ignoredSheets.includes(className)){
-        return;
-      }
+const classDropdown =
+document.getElementById('class');
 
-      totalClasses++;
+const feeDropdown =
+document.getElementById('feeClass');
 
-      let students = data[className];
+const attendanceDropdown =
+document.getElementById('attendanceClass');
 
-      students.forEach(student => {
+classDropdown.innerHTML = '';
+feeDropdown.innerHTML = '';
+attendanceDropdown.innerHTML =
+'<option value="">Select Class</option>';
 
-        totalStudents++;
+Object.keys(data).forEach(className => {
 
-        tbody.innerHTML += `
+if(ignoredSheets.includes(className)){
+return;
+}
 
-        <tr>
+totalClasses++;
 
-          <td>${student.student || ""}</td>
+analyticsData[className] =
+data[className].length;
 
-          <td>${className}</td>
+classDropdown.innerHTML +=
+`<option value="${className}">
+${className}
+</option>`;
 
-          <td>${student.father || ""}</td>
+feeDropdown.innerHTML +=
+`<option value="${className}">
+${className}
+</option>`;
 
-          <td>${student.phone || ""}</td>
+attendanceDropdown.innerHTML +=
+`<option value="${className}">
+${className}
+</option>`;
 
-        </tr>
+let students = data[className];
 
-        `;
+students.forEach(student => {
 
-      });
+totalStudents++;
 
-    });
+tbody.innerHTML += `
 
-    // DASHBOARD UPDATE
-    document.getElementById("totalStudents")
-    .innerHTML = totalStudents;
+<tr>
 
-    document.getElementById("totalClasses")
-    .innerHTML = totalClasses;
+<td>${student.student || ""}</td>
 
-  }
+<td>${className}</td>
 
-  catch(error){
+<td>${student.father || ""}</td>
 
-    console.log(error);
+<td>${student.phone || ""}</td>
 
-    alert("Student Data Load Error");
+</tr>
 
-  }
+`;
+
+});
+
+});
+
+document.getElementById("totalStudents")
+.innerHTML = totalStudents;
+
+document.getElementById("totalClasses")
+.innerHTML = totalClasses;
+
+loadChart();
+
+}catch(error){
+
+console.log(error);
+
+alert("Student Data Load Error");
+
+}
 
 }
 
@@ -841,12 +867,19 @@ document.getElementById('waStatus')
 
 }
 
-/* ONLOAD */
-/* =========================
-ATTENDANCE SYSTEM
-========================= */
+/* ATTENDANCE */
 
-async function loadAttendanceStudents(){
+document.addEventListener('change', function(e){
+
+if(e.target.id === 'attendanceClass'){
+
+loadAttendanceTable();
+
+}
+
+});
+
+async function loadAttendanceTable(){
 
 try{
 
@@ -854,22 +887,8 @@ const response = await fetch(API_URL);
 
 const data = await response.json();
 
-const attendanceClass =
-document.getElementById('attendanceClass');
-
-attendanceClass.innerHTML =
-'<option value="">Select Class</option>';
-
-Object.keys(data).forEach(className=>{
-
-attendanceClass.innerHTML +=
-`<option>${className}</option>`;
-
-});
-
-attendanceClass.onchange = function(){
-
-let cls = this.value;
+let cls =
+document.getElementById('attendanceClass').value;
 
 const tbody =
 document.getElementById('attendanceTable');
@@ -913,8 +932,6 @@ value="Leave">
 `;
 
 });
-
-};
 
 }catch(error){
 
@@ -991,11 +1008,7 @@ if(result.success){
 
 document.getElementById('attendanceStatus')
 .innerHTML =
-`✅ Attendance Saved & Messages Sent`;
-
-addActivity(
-`📋 Attendance saved for ${cls}`
-);
+`✅ Attendance Saved`;
 
 }else{
 
@@ -1012,20 +1025,14 @@ document.getElementById('attendanceStatus')
 }
 
 }
-/* ACTIVITY SYSTEM */
 
-function addActivity(message){
+/* ONLOAD */
 
-console.log('Activity:', message);
-
-}
 window.onload = function(){
 
 loadStudents();
 
 checkWhatsappStatus();
-
-loadAttendanceStudents();
 
 document.getElementById('attendanceDate').value =
 new Date().toISOString().split('T')[0];
