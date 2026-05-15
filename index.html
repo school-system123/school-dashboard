@@ -458,7 +458,50 @@ SEND FEE REMINDER
 <div id="feeStatus" class="status"></div>
 
 </div>
+<!-- ATTENDANCE -->
 
+<div id="attendance"
+class="section panel"
+style="display:none;">
+
+<h2>📋 Attendance System</h2>
+
+<select id="attendanceClass">
+<option value="">Select Class</option>
+</select>
+
+<input type="date" id="attendanceDate">
+
+<div class="table-container" style="margin-top:20px;">
+
+<table>
+
+<thead>
+<tr>
+<th>Student Name</th>
+<th>Present</th>
+<th>Absent</th>
+<th>Leave</th>
+</tr>
+</thead>
+
+<tbody id="attendanceTable"></tbody>
+
+</table>
+
+</div>
+
+<button class="btn"
+onclick="saveAttendance()">
+
+SAVE ATTENDANCE
+
+</button>
+
+<div id="attendanceStatus"
+class="status"></div>
+
+</div>
 </div>
 
 <script>
