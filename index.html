@@ -922,7 +922,7 @@ console.log(error);
 
 /* SAVE ATTENDANCE */
 
-function saveAttendance(){
+async function saveAttendance(){
 
 let cls =
 document.getElementById('attendanceClass').value;
@@ -941,15 +941,71 @@ return;
 let rows =
 document.querySelectorAll('#attendanceTable tr');
 
-let total = rows.length;
+let attendance = [];
+
+rows.forEach(row=>{
+
+let student =
+row.cells[0].innerText;
+
+let status =
+row.querySelector('input[type="radio"]:checked').value;
+
+attendance.push({
+student,
+status
+});
+
+});
+
+document.getElementById('attendanceStatus')
+.innerHTML='⏳ Sending...';
+
+try{
+
+let response =
+await fetch('http://localhost:3000/save-attendance',{
+
+method:'POST',
+
+headers:{
+'Content-Type':'application/json'
+},
+
+body:JSON.stringify({
+className:cls,
+date,
+attendance
+})
+
+});
+
+let result =
+await response.json();
+
+if(result.success){
 
 document.getElementById('attendanceStatus')
 .innerHTML =
-`✅ Attendance Saved For ${total} Students`;
+`✅ Attendance Saved & Messages Sent`;
 
 addActivity(
 `📋 Attendance saved for ${cls}`
 );
+
+}else{
+
+document.getElementById('attendanceStatus')
+.innerHTML='❌ Failed';
+
+}
+
+}catch(error){
+
+document.getElementById('attendanceStatus')
+.innerHTML='❌ Server Offline';
+
+}
 
 }
 window.onload = function(){
