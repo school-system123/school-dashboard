@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>THE EDUCATION FOUNTAIN MODEL SCHOOL</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
@@ -25,8 +29,8 @@ overflow-x:hidden;
 }
 
 select{
-background:#1e293b !important;
-color:white !important;
+background:#1e293b;
+color:white;
 }
 
 select option{
@@ -55,7 +59,6 @@ padding:40px;
 border-radius:30px;
 background:rgba(255,255,255,0.08);
 backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,0.08);
 }
 
 .login-box h1{
@@ -87,9 +90,9 @@ padding:16px;
 margin-top:15px;
 border:none;
 border-radius:16px;
-color:white;
 font-weight:700;
 cursor:pointer;
+color:white;
 }
 
 .login-btn{
@@ -104,8 +107,7 @@ background:#0f172a;
 display:none;
 margin-top:15px;
 text-align:center;
-color:#ef4444;
-font-weight:700;
+color:red;
 }
 
 /* SIDEBAR */
@@ -116,8 +118,8 @@ left:0;
 top:0;
 width:280px;
 height:100vh;
-padding:25px;
 background:#0f172a;
+padding:25px;
 overflow:auto;
 }
 
@@ -139,15 +141,13 @@ border:none;
 border-radius:16px;
 background:rgba(255,255,255,0.06);
 color:white;
-text-align:left;
 cursor:pointer;
+text-align:left;
 font-weight:600;
-transition:0.3s;
 }
 
 .menu button:hover{
 background:linear-gradient(135deg,#2563eb,#7c3aed);
-transform:translateX(5px);
 }
 
 /* MAIN */
@@ -178,7 +178,7 @@ background:rgba(255,255,255,0.05);
 }
 
 .card h2{
-font-size:38px;
+font-size:36px;
 margin-top:10px;
 }
 
@@ -215,11 +215,6 @@ background:linear-gradient(135deg,#2563eb,#7c3aed);
 color:white;
 font-weight:700;
 cursor:pointer;
-transition:0.3s;
-}
-
-.btn:hover{
-transform:translateY(-3px);
 }
 
 .table-container{
@@ -233,24 +228,15 @@ border-collapse:collapse;
 
 th,td{
 padding:15px;
-text-align:left;
 border-bottom:1px solid rgba(255,255,255,0.08);
-}
-
-.chart-box{
-height:400px;
-}
-
-#activityList{
-display:flex;
-flex-direction:column;
-gap:15px;
+text-align:left;
 }
 
 .activity-item{
 padding:15px;
 border-radius:15px;
 background:rgba(255,255,255,0.06);
+margin-bottom:10px;
 }
 
 .status{
@@ -338,8 +324,11 @@ margin-left:0;
 <div class="main">
 
 <div class="topbar">
+
 <h1>School Management Dashboard</h1>
+
 <p id="liveDate"></p>
+
 </div>
 
 <!-- DASHBOARD -->
@@ -363,32 +352,13 @@ margin-left:0;
 <h2 id="waStatus">CHECKING...</h2>
 </div>
 
-<div class="card">
-<h3>System</h3>
-<h2>ONLINE</h2>
 </div>
-
-</div>
-
-<div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;">
 
 <div class="panel">
 
 <h2>📈 Students Analytics</h2>
 
-<div class="chart-box">
 <canvas id="myChart"></canvas>
-</div>
-
-</div>
-
-<div class="panel">
-
-<h2>🔥 Recent Activity</h2>
-
-<div id="activityList"></div>
-
-</div>
 
 </div>
 
@@ -420,7 +390,9 @@ SEND HOMEWORK
 
 <h2>👨‍🎓 Student Records</h2>
 
-<input type="text" id="searchStudent" placeholder="Search Student" onkeyup="searchStudent()">
+<input type="text" id="searchStudent"
+placeholder="Search Student"
+onkeyup="searchStudent()">
 
 <div class="table-container">
 
@@ -449,8 +421,6 @@ SEND HOMEWORK
 
 <h2>🕘 Homework History</h2>
 
-<div class="table-container">
-
 <table>
 
 <thead>
@@ -465,8 +435,6 @@ SEND HOMEWORK
 <tbody id="historyTable"></tbody>
 
 </table>
-
-</div>
 
 </div>
 
@@ -492,54 +460,68 @@ SEND FEE REMINDER
 
 <script>
 
+const API_URL =
+'https://script.google.com/macros/s/AKfycbw8b-iV5wHuztg0PJryrWZuEpzhP8p0aUYp79eAZBNug0K0jkianda8VJ55QOCm7bk7/exec';
+
+let analyticsData = {};
+let homeworkHistory = [];
+let myChart;
+
+/* LOGIN */
+
+function loginSystem(){
+
+let email =
+document.getElementById('loginUsername').value;
+
+let password =
+document.getElementById('loginPassword').value;
+
+if(
+email === 'admin@gmail.com'
+&&
+password === '123456'
+){
+
+localStorage.setItem('schoolLogin','true');
+
+document.getElementById('loginScreen')
+.style.display='none';
+
+}else{
+
+document.getElementById('error')
+.style.display='block';
+
+}
+
+}
+
+function logoutSystem(){
+
+localStorage.removeItem('schoolLogin');
+
+location.reload();
+
+}
+
+function resetPassword(){
+
+alert('Contact Admin');
+
+}
+
 /* SECTION */
 
 function showSection(id){
 
-document.querySelectorAll('.section').forEach(sec=>{
+document.querySelectorAll('.section')
+.forEach(sec=>{
 sec.style.display='none';
 });
 
-document.getElementById(id).style.display='block';
-
-}
-
-/* ACTIVITY */
-
-function addActivity(message){
-
-recentActivities.unshift({
-time:new Date().toLocaleTimeString(),
-message
-});
-
-if(recentActivities.length > 8){
-recentActivities.pop();
-}
-
-renderActivities();
-
-}
-
-function renderActivities(){
-
-let container =
-document.getElementById('activityList');
-
-container.innerHTML='';
-
-recentActivities.forEach(item=>{
-
-container.innerHTML += `
-<div class="activity-item">
-<div style="font-size:12px;color:#94a3b8;margin-bottom:6px;">
-${item.time}
-</div>
-${item.message}
-</div>
-`;
-
-});
+document.getElementById(id)
+.style.display='block';
 
 }
 
@@ -611,8 +593,6 @@ document.getElementById('totalClasses')
 .innerHTML = Object.keys(analyticsData).length;
 
 loadChart();
-
-addActivity(`👨‍🎓 ${total} students loaded successfully`);
 
 }catch(error){
 
@@ -689,31 +669,9 @@ homework
 let result =
 await response.json();
 
-if(result.success){
-
 document.getElementById('status')
 .innerHTML =
 `✅ Sent To ${result.totalSent} Students`;
-
-addActivity(`📚 Homework sent to ${cls}`);
-
-homeworkHistory.unshift({
-
-date:new Date().toLocaleString(),
-className:cls,
-subject,
-homework
-
-});
-
-loadHistory();
-
-}else{
-
-document.getElementById('status')
-.innerHTML='❌ Failed';
-
-}
 
 }catch(error){
 
@@ -721,30 +679,6 @@ document.getElementById('status')
 .innerHTML='❌ Server Offline';
 
 }
-
-}
-
-/* HISTORY */
-
-function loadHistory(){
-
-let table =
-document.getElementById('historyTable');
-
-table.innerHTML='';
-
-homeworkHistory.forEach(item=>{
-
-table.innerHTML += `
-<tr>
-<td>${item.date}</td>
-<td>${item.className}</td>
-<td>${item.subject}</td>
-<td>${item.homework}</td>
-</tr>
-`;
-
-});
 
 }
 
@@ -789,20 +723,9 @@ message
 let result =
 await response.json();
 
-if(result.success){
-
 document.getElementById('feeStatus')
 .innerHTML =
 `✅ Sent To ${result.totalSent} Students`;
-
-addActivity(`💰 Fee reminder sent to ${cls}`);
-
-}else{
-
-document.getElementById('feeStatus')
-.innerHTML='❌ Failed';
-
-}
 
 }catch(error){
 
@@ -833,35 +756,8 @@ labels:Object.keys(analyticsData),
 datasets:[{
 label:'Students',
 data:Object.values(analyticsData),
-borderWidth:1,
-borderRadius:10
+borderWidth:1
 }]
-},
-
-options:{
-responsive:true,
-
-plugins:{
-legend:{
-labels:{
-color:'white'
-}
-}
-},
-
-scales:{
-y:{
-ticks:{
-color:'white'
-}
-},
-x:{
-ticks:{
-color:'white'
-}
-}
-}
-
 }
 
 });
